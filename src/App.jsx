@@ -11,12 +11,9 @@ import SignInPage from './containers/Auth/SignInPage';
 import HomePage from './components/HomePage';
 import PageContent from './components/PageContent';
 import Dashboard from "./containers/Main/Dashboard"
-import { LanguageProvider } from './contexts/LanguageContext';
 
 function App() {
   return (
-    <PageContent>
-      <LanguageProvider>
         <Router>
           <div className="App">
             <Switch>
@@ -35,8 +32,6 @@ function App() {
             </Switch>
           </div>
         </Router>
-      </LanguageProvider>
-    </PageContent>
   );
 }
 

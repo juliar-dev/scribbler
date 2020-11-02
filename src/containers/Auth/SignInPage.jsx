@@ -15,7 +15,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
 
 import styles from '../../styles/FormStyles'
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function SignInPage(props) {
     const { classes } = props;

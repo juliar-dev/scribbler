@@ -1,7 +1,4 @@
 const styles = theme => ({
-    container: {
-        // background: `linear-gradient(to bottom, rgba(255, 183, 77, 0.5), rgba(219, 146, 0, 0.6) )`
-    },
     main: {
         width: "auto",
         display: "block",
@@ -15,12 +12,10 @@ const styles = theme => ({
         }
     },
     paper: {
-        // marginBottom: theme.spacing(8),
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
-        // boxShadow: 30
     },
     avatar: {
         margin: theme.spacing(),
@@ -28,7 +23,6 @@ const styles = theme => ({
     },
     form: {
         width: "100%",
-        // marginTop: theme.spacing(3)
     },
     radioContainer: {
         display: "inline-block",
