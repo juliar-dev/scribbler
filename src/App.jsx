@@ -9,7 +9,6 @@ import {
 import SignUpPage from './containers/Auth/SignUpPage';
 import SignInPage from './containers/Auth/SignInPage';
 import HomePage from './components/HomePage';
-import PageContent from './components/PageContent';
 import Dashboard from "./containers/Main/Dashboard"
 
 function App() {
