@@ -1,11 +1,28 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+
+import Nav from './Nav';
+import About from './About';
 
 function Dashboard(props) {
     return(
-        <>
-            <h1>Dashboard!!!</h1>
-            <span>User: {props.username}</span>
-        </>
+        <Router>
+            <div className="dashboard">
+                <Nav />
+            </div>
+            <Switch>
+                <Route exact path="/dash">
+                    <Dashboard />
+                </Route>
+                <Route path="/about">
+                    <About />
+                </Route>
+            </Switch>
+        </Router>
     )
 }
 
