@@ -31,7 +31,7 @@ function SignInPage(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        window.location.href = "/dashboard";
+        window.location.href = "/";
     }
 
     return (
