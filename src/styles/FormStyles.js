@@ -1,3 +1,5 @@
+import colors from './colors';
+
 const styles = theme => ({
     main: {
         width: "auto",
@@ -19,7 +21,7 @@ const styles = theme => ({
     },
     avatar: {
         margin: theme.spacing(),
-        backgroundColor: theme.palette.warning.light,
+        backgroundColor: 'rgb(255,183,77)',
     },
     form: {
         width: "100%",
@@ -29,12 +31,12 @@ const styles = theme => ({
     },
     radio: {
         '&$checked': {
-            color: theme.palette.warning.light
+            color: 'rgb(255,183,77)'
         }
     },
     submit: {
         marginTop: theme.spacing(3),
-        backgroundColor: theme.palette.warning.light
+        backgroundColor: 'rgb(255,183,77)'
     },
     link: {
         fontSize: 10

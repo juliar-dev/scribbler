@@ -1,3 +1,5 @@
+import colors from './colors';
+
 const styles = theme => ({
     content: {
         width: "auto",
@@ -7,7 +9,7 @@ const styles = theme => ({
         paddingBottom: 20,
     },
     toolbar: {
-        background: "#1B1B1B",
+        background: colors.navBar,
     },
     navItems: {
         display: "flex",
@@ -34,7 +36,7 @@ const styles = theme => ({
     },
     button: {
         marginTop: theme.spacing(6),
-        backgroundColor: theme.palette.warning.light,
+        backgroundColor: 'rgb(255,183,77)',
         borderRadius: 1,
         color: "#FFFFFF",
         height: 50,
