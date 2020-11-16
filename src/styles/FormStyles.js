@@ -1,5 +1,3 @@
-import colors from './colors';
-
 const styles = theme => ({
     main: {
         width: "auto",

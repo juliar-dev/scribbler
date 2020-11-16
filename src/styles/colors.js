@@ -3,7 +3,7 @@ const colors = {
     text: 'rgb(26, 26, 26)',
     linkText: 'rgb(196, 196, 196)',
     label: 'rgb(166,170,191)',
-    enter: 'rgb(255,183,77),',
+    button: 'rgb(255,183,77),',
     navBar: 'rgb(27, 27, 27)'
 }
 

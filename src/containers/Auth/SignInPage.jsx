@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { 
     Paper, 
     Avatar, 
@@ -10,6 +10,10 @@ import {
     FormControlLabel, 
     Button, 
 } from '@material-ui/core';
+
+import { UserContext } from '../../contexts/UserContext';
+import { login } from './login';
+
 import CheckBox from '@material-ui/core/Checkbox';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
@@ -20,6 +24,8 @@ import { Link } from 'react-router-dom';
 function SignInPage(props) {
     const { classes } = props;
 
+    const { initializeUser } = useContext(UserContext);
+
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
 
@@ -29,10 +35,12 @@ function SignInPage(props) {
         name === "username" ? setUsername(value) : setPassword(value);
     }
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        window.location.href = "/";
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const user = await login(username, password)
+            initializeUser(user);
+            // window.location.href = "/";
+}
 
     return (
         <div className={classes.container}>
