@@ -4,8 +4,8 @@ const styles = theme => ({
     content: {
         width: "auto",
         display: "block",
-        marginLeft: theme.spacing(3),
-        marginRight: theme.spacing(3),
+        marginLeft: theme.spacing(4),
+        marginRight: theme.spacing(4),
         paddingBottom: 20,
     },
     appBar: { 
@@ -75,24 +75,38 @@ const styles = theme => ({
         fontSize: 15
     },
     aboutSection: {
+        textAlign: "left",
+        marginTop: theme.spacing(13.6),
         display: "grid",
-        border: "1px solid black",
-        gridTemplateRows: "auto auto",
+        gridTemplateRows: "auto",
         gridTemplateColumns: "auto auto",
-        marginTop: theme.spacing(20),
-        '&::before': {
-            content: '" "',
-            position: "absolute",
-            left: 0,
-            width: theme.spacing(200),
-            height: theme.spacing(100),
-            transform: 'scale(0.4)',
-            zIndex: -1,
-            backgroundImage: 'url(https://cdn.writermag.com/2016/12/blogs-versus-articles.jpg)',
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-        }
+        gridGap: 20,
+        marginLeft: 0
+        // '&::before': {
+        //     content: '" "',
+        //     position: "absolute",
+        //     right: theme.spacing(44),
+        //     width: theme.spacing(200),
+        //     height: theme.spacing(100),
+        //     transform: 'scale(0.4)',
+        //     zIndex: -1,
+        //     backgroundImage: 'url(https://cdn.writermag.com/2016/12/blogs-versus-articles.jpg)',
+        //     backgroundRepeat: "no-repeat",
+        //     backgroundSize: "cover",
+        // }
     },
+    item2: {
+        gridRow: "1 / 1",
+        gridColumn: "2 / 2"
+    },
+    item3: {
+        gridRow: "1 / 1",
+        gridColumn: "1 / 1",
+        width: theme.spacing(100),
+        height: theme.spacing(50),
+        // transform: 'scale(0.1)',
+        // backgroundSize: "cover"
+    }
 });
 
 export default styles;  
