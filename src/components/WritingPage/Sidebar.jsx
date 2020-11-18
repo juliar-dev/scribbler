@@ -2,6 +2,15 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import styles from "./writingStyles";
 
+import SearchIcon from '@material-ui/icons/Search';
+import PublishIcon from '@material-ui/icons/Publish';
+import AddIcon from '@material-ui/icons/Add';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import NoteIcon from '@material-ui/icons/Note';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import HelpIcon from '@material-ui/icons/Help';
+import FeedbackIcon from '@material-ui/icons/Feedback';
+
 import SearchBar from "material-ui-search-bar";
 
 function Sidebar(props) {
@@ -10,7 +19,7 @@ function Sidebar(props) {
         <div className={classes.container} >
             <div className={classes.sidebarContainer} >
                 <div id={classes.searchbar} className={classes.sidebarChild}>
-                    <p>Search</p>
+                    <p><SearchIcon /> Search</p>
                     {/* <SearchBar
                         className={classes.search}
                         // value="search"
@@ -19,25 +28,27 @@ function Sidebar(props) {
                     /> */}
                 </div>
                 <div id={classes.upload} className={classes.sidebarChild}>
-                    <button>+ Upload</button>
+                    <button><PublishIcon /> Upload</button>
                 </div>
                 <div id={classes.write} className={classes.sidebarChild}>
-                    <button>+ New Story</button>
+                    <button><AddIcon /> New Story</button>
                 </div>
                 <div id={classes.storyFolder} className={classes.sidebarChild}>
-                    <p>Stories</p>
+                    <p><LocalLibraryIcon />Stories</p>
                 </div>
                 <div id={classes.notebook} className={classes.sidebarChild}>
-                    <p>Notebook</p>
+                    <p><NoteIcon /> Notebook</p>
                 </div>
                 <div id={classes.drafts} className={classes.sidebarChild}>
-                    <p>Drafts</p>
+                    <p><ImportContactsIcon /> Drafts</p>
                 </div>
-                <div id={classes.help} className={classes.sidebarChild}>
-                    <a href="#">Help</a>
-                </div>
-                <div id={classes.feedback} className={classes.sidebarChild}>
-                    <a href="#">Send feedback</a>
+                <div className={classes.links}>
+                    <div id={classes.help} className={classes.sidebarChild}>
+                        <HelpIcon /><a href="#">Help</a>
+                    </div>
+                    <div id={classes.feedback} className={classes.sidebarChild}>
+                        <FeedbackIcon/><a href="#">Send feedback</a>
+                    </div>
                 </div>
             </div>
         </div>
