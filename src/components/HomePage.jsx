@@ -2,6 +2,7 @@ import React, { useRef, useContext, useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { withStyles, AppBar, Toolbar, Typography, Button  } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 
 import styles from '../styles/PageStyles';
 import AboutPage from './AboutPage';
@@ -30,16 +31,24 @@ function HomePage(props) {
             <div className={classes.content}>
                 <AppBar className={classes.appbar} position='fixed'>
                     <Toolbar className={classes.toolbar}>
-                        <p>{user && user.username}</p>
                         <div className={classes.navItems}>
                             <Link style={LinkStyles()} to="/"><span className={classes.logo}><HomeIcon /></span></Link>
                             <Link style={LinkStyles()} to="/" onClick={executeScroll}><span>About</span></Link>
                             <Link style={LinkStyles()} to="/sign_in"><span>Log In</span></Link>
+                            {user &&
+                                <>
+                                    <Link style={LinkStyles()} to="/read_feed"><span>Explore</span></Link>
+                                    <Link style={LinkStyles()} to="/write"><span>Write</span></Link>
+                                    <Link style={LinkStyles()} to="/account"><span><AccountCircleOutlinedIcon />{user.username}</span></Link>
+                                </>
+                            }
                         </div>
                     </Toolbar>
                 </AppBar>
                 <main className={classes.main}>
-                    <div className={classes.banner}>
+                    {!user &&
+                    <>
+                        <div className={classes.banner}>
                         <Typography className={classes.title} variant="h1">Build a writing community</Typography>
                         <Typography className={classes.subtitle} variant="h2">
                             Developing your writing skills with a connection to professional writers
@@ -50,10 +59,12 @@ function HomePage(props) {
                         <Typography className={classes.buttonFooter} variant="h3">
                             Already have an account?<Link to="/sign_in">Log in</Link>
                         </Typography>
-                    </div>
-                    <div ref={myRef}>
-                        <AboutPage />
-                    </div>
+                        </div>
+                        <div ref={myRef}>
+                            <AboutPage />
+                        </div>
+                    </>
+                    }
                 </main>
             </div>
         </div>

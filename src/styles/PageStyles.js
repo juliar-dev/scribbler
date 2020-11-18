@@ -1,4 +1,4 @@
-// import colors from './colors';
+import colors from './colors';
 
 const styles = theme => ({
     content: {
@@ -9,11 +9,11 @@ const styles = theme => ({
         paddingBottom: 20,
     },
     appBar: { 
-        background: 'transparent', 
-        boxShadow: 'none'
+        // background: 'transparent', 
+        // boxShadow: 'none'
     },
     toolbar: {
-        // background: colors.navBar,
+        background: colors.navBar,
         position: "fixed",
         width: "100%"
     },
@@ -40,7 +40,7 @@ const styles = theme => ({
             height: theme.spacing(63),
             zIndex: -1,
             opacity: 0.6,
-            backgroundImage: 'url(https://peaceislamicschool.com/wp-content/uploads/2019/10/banner-img-1.jpg)',
+            // backgroundImage: 'url(https://peaceislamicschool.com/wp-content/uploads/2019/10/banner-img-1.jpg)',
             backgroundRepeat: "no-repeat",
             backgroundPosition: 50% 0,
             msBackgroundSize: "cover",
@@ -97,7 +97,8 @@ const styles = theme => ({
     },
     item2: {
         gridRow: "1 / 1",
-        gridColumn: "2 / 2"
+        gridColumn: "2 / 2",
+        background: colors.navBar
     },
     item3: {
         gridRow: "1 / 1",
