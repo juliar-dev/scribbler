@@ -9,6 +9,8 @@ import { UserProvider } from "./contexts/UserContext";
 import SignUpPage from './containers/Auth/SignUpPage';
 import SignInPage from './containers/Auth/SignInPage';
 import HomePage from './components/HomePage';
+import WritingPage from './components/WritingPage';
+import Nav from './components/Nav';
 
 function App() {
   return (
@@ -16,9 +18,11 @@ function App() {
           <div className="App">
             <UserProvider>
               <Route>
+                <Route path = "/" component={Nav}/>
                 <Route exact path="/" component={HomePage} />
                 <Route path="/sign_up" component={SignUpPage} />
                 <Route path="/sign_in" component={SignInPage} />
+                <Route path="/write" component={WritingPage} />
               </Route>
             </UserProvider>
           </div>

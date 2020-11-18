@@ -1,12 +1,11 @@
 import React, { useRef, useContext, useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { withStyles, AppBar, Toolbar, Typography, Button  } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import { withStyles, Typography, Button  } from '@material-ui/core';
 
 import styles from '../styles/PageStyles';
 import AboutPage from './AboutPage';
 import { UserContext } from '../contexts/UserContext';
+import Nav from './Nav';
 
 const LinkStyles = () => {
     return {textDecoration: 'none', color: "#FFFFFF"}
@@ -17,36 +16,13 @@ function HomePage(props) {
 
     const { classes } = props;
     const myRef = useRef(null)
-    
-    function executeScroll() {
-        myRef.current.scrollIntoView({
-            behavior: "smooth"
-        });
-    }
-
-    console.log(user);
 
     return (
         <div className={classes.container}>
             <div className={classes.content}>
-                <AppBar className={classes.appbar} position='fixed'>
-                    <Toolbar className={classes.toolbar}>
-                        <div className={classes.navItems}>
-                            <Link style={LinkStyles()} to="/"><span className={classes.logo}><HomeIcon /></span></Link>
-                            <Link style={LinkStyles()} to="/" onClick={executeScroll}><span>About</span></Link>
-                            <Link style={LinkStyles()} to="/sign_in"><span>Log In</span></Link>
-                            {user &&
-                                <>
-                                    <Link style={LinkStyles()} to="/read_feed"><span>Explore</span></Link>
-                                    <Link style={LinkStyles()} to="/write"><span>Write</span></Link>
-                                    <Link style={LinkStyles()} to="/account"><span><AccountCircleOutlinedIcon />{user.username}</span></Link>
-                                </>
-                            }
-                        </div>
-                    </Toolbar>
-                </AppBar>
+                <Nav myRef={myRef}/>
                 <main className={classes.main}>
-                    {!user &&
+                    {user &&
                     <>
                         <div className={classes.banner}>
                         <Typography className={classes.title} variant="h1">Build a writing community</Typography>
@@ -65,6 +41,10 @@ function HomePage(props) {
                         </div>
                     </>
                     }
+                    <div className={classes.grid}>
+                        <div className={classes.item1}>Explore</div>
+                        <Link to="/write"><div className={classes.item2}>Write</div></Link>
+                    </div>
                 </main>
             </div>
         </div>
