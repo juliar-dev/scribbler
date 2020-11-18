@@ -95,19 +95,19 @@ const styles = theme => ({
         //     backgroundSize: "cover",
         // }
     },
-    // item2: {
-    //     gridRow: "1 / 1",
-    //     gridColumn: "2 / 2",
-    //     background: colors.navBar
-    // },
-    // item3: {
-    //     gridRow: "1 / 1",
-    //     gridColumn: "1 / 1",
-    //     width: theme.spacing(100),
-    //     height: theme.spacing(50),
-    //     // transform: 'scale(0.1)',
-    //     // backgroundSize: "cover"
-    // }
+    aboutText: {
+        gridRow: "1 / 1",
+        gridColumn: "2 / 2",
+        background: colors.navBar
+    },
+    aboutImg: {
+        gridRow: "1 / 1",
+        gridColumn: "1 / 1",
+        width: theme.spacing(100),
+        height: theme.spacing(50),
+        // transform: 'scale(0.1)',
+        // backgroundSize: "cover"
+    },
     grid: {
         display: "grid",
         gridTemplateRows: "auto auto",

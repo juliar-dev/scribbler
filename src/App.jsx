@@ -9,7 +9,7 @@ import { UserProvider } from "./contexts/UserContext";
 import SignUpPage from './containers/Auth/SignUpPage';
 import SignInPage from './containers/Auth/SignInPage';
 import HomePage from './components/HomePage';
-import WritingPage from './components/WritingPage';
+import WritingPage from './components/WritingPage/WritingPage';
 import Nav from './components/Nav';
 
 function App() {

@@ -7,7 +7,7 @@ function AboutPage(props) {
     return (
         <div className={classes.content} id="about">
             <div className={classes.aboutSection}>
-                <div className={classes.item2}>
+                <div className={classes.aboutText}>
                     <Typography className={classes.title} variant="h1">About Us</Typography>
                     <Typography>
                         Contrary to popular belief, Lorem Ipsum is not simply random text. 
@@ -23,7 +23,7 @@ function AboutPage(props) {
                         accompanied by English versions from the 1914 translation by H. Rackham.
                     </Typography>
                 </div>
-                <img className={classes.item3} src="https://cdn.writermag.com/2016/12/blogs-versus-articles.jpg" alt=""/>
+                <img className={classes.aboutImg} src="https://cdn.writermag.com/2016/12/blogs-versus-articles.jpg" alt=""/>
             </div>
         </div>
     )
