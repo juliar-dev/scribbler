@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core";
-import styles from "./writingStyles";
+import styles from "./writingStyles/sidebarStyles";
 
 import SearchIcon from '@material-ui/icons/Search';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -11,10 +11,8 @@ import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import HelpIcon from '@material-ui/icons/Help';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 
-import SearchBar from "material-ui-search-bar";
-
 function Sidebar(props) {
-    const { classes } = props;
+    const { classes, setSelectedPage } = props;
 
     return (
         <div className={classes.container} >
@@ -29,7 +27,7 @@ function Sidebar(props) {
                     <button><PublishIcon className={classes.buttonIcon} /> Upload</button>
                 </div>
                 <div id={classes.write} className={classes.sidebarChild}>
-                    <button><AddIcon className={classes.buttonIcon} /> New Story</button>
+                    <button id="new_text" onClick={(e) => setSelectedPage(e.target.id)}><AddIcon className={classes.buttonIcon} /> New Text</button>
                 </div>
                 <div id={classes.storyFolder} className={classes.sidebarChild}>
                     <p><LocalLibraryIcon className={classes.icon} />Stories</p>

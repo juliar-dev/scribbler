@@ -1,20 +1,12 @@
-import colors from '../../styles/colors';
+import colors from '../../../styles/colors';
 
 const styles = theme => ({
-    content: {
-        width: "auto",
-        display: "block",
-        // marginLeft: theme.spacing(4),
-        // marginRight: theme.spacing(4),
-        background: colors.editBacking
-    },
     sidebarContainer: {
         display: "grid",
         gridTemplateRows: "10vh 6.6vh 10vh 8vh 8vh 40vh repeat(2, 4vh)",
         gridTemplateColumns: "auto",
         alignItems: "start",
         textAlign: "center",
-        marginTop: theme.spacing(6),
         marginLeft: theme.spacing(1),
         // padding: `0 ${theme.spacing(2)}px`,
         width: "14vw",
