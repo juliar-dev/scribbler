@@ -10,6 +10,7 @@ const colors = {
     nav: 'rgb(41, 41, 41)',
 
     backing: 'rgb(29, 29, 29)',
+    editBacking: 'rgb(220, 220, 220)'
 }
 
 export default colors

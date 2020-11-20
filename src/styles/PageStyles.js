@@ -13,7 +13,7 @@ const styles = theme => ({
         // boxShadow: 'none'
     },
     toolbar: {
-        background: colors.navBar,
+        background: colors.backing,
         position: "fixed",
         width: "100%"
     },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from '@material-ui/core';
 // import PublishIcon from '@material-ui/icons/Publish';
 
@@ -7,6 +7,9 @@ import Sidebar from "./Sidebar";
 
 function WritingPage(props) {
     const { classes } = props;
+
+    const [ selected, setSelected ] = useState(null);
+
     return (
         <div className={classes.container}>
             <div className={classes.content}>

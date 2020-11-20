@@ -4,20 +4,22 @@ const styles = theme => ({
     content: {
         width: "auto",
         display: "block",
-        marginLeft: theme.spacing(4),
-        marginRight: theme.spacing(4),
+        // marginLeft: theme.spacing(4),
+        // marginRight: theme.spacing(4),
+        background: colors.editBacking
     },
     sidebarContainer: {
         display: "grid",
-        gridTemplateRows: "12vh 7vh 10vh 8vh 8vh 35vh repeat(2, 4vh)",
+        gridTemplateRows: "10vh 6.6vh 10vh 8vh 8vh 40vh repeat(2, 4vh)",
         gridTemplateColumns: "auto",
         alignItems: "start",
         textAlign: "center",
         marginTop: theme.spacing(6),
+        marginLeft: theme.spacing(1),
         // padding: `0 ${theme.spacing(2)}px`,
         width: "14vw",
         height: "90vh",
-        background:  "rgb(29, 29, 29)",
+        background: colors.backing,
         borderRadius: "5px",
     },
     sidebarChild: {
@@ -29,11 +31,9 @@ const styles = theme => ({
             borderRadius: "25px",
             textAlign: "left",
             width: "90%",
-            padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+            padding: `${theme.spacing(0.5)}px ${theme.spacing(2)}px`,
             color: "black",
             cursor: "pointer",
-            // display: 'flex',
-            // alignItems: 'center'
         },
         '& p': {
             background: colors.select,
@@ -49,17 +49,39 @@ const styles = theme => ({
             alignSelf: "end",
             textAlign: "left",
             color: "white",
-            // display: 'flex',
-            // alignItems: 'center'
         }
+    },
+    buttonIcon : {
+        display: "inline-flex",
+        verticalAlign: "middle",
+        marginBottom: theme.spacing(0.5)
+    },
+    icon : {
+        display: "inline-flex",
+        verticalAlign: "middle",
+        color: "white",
+        marginRight: theme.spacing(1)
     },
     links: {
         borderTop: "0.5px solid white",
     },
     search: {
-        // borderRadius: "10px",
-        // color: "red",
+        background: "white",
+        borderRadius: "25px",
+        marginTop: theme.spacing(3),
+        marginLeft: theme.spacing(1.2),
+        width: "90%",
+        opacity: 0.5
     },
+    searchBar: {
+        height: "20px",
+        width: "130px",
+        border: "none"
+    },
+    searchIcon: {
+        marginTop: theme.spacing(1),
+        color: "grey"
+    }
 });
 
 export default styles;  
