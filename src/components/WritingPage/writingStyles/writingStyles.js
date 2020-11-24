@@ -4,8 +4,8 @@ const styles = theme => ({
     content: {
         width: "auto",
         display: "block",
-        marginLeft: theme.spacing(4),
-        marginRight: theme.spacing(4),
+        // marginLeft: theme.spacing(4),
+        // marginRight: theme.spacing(4),
         background: colors.editBacking
     },
     dashboard: {
@@ -17,17 +17,15 @@ const styles = theme => ({
     sidebar: {
         gridRow: '1 / 1',
         gridColumn: '1 / 1',
-        border: '1px solid green'
     },
     quickView: {
         gridRow: '1 / 1',
         gridColumn: '2 / 2',
-        border: '1px solid red'
+        borderRight: '1px dotted black'
     },
     editor: {
         gridRow: '1 / 1',
         gridColumn: '3 / 3',
-        border: '1px solid black'
     }
 });
 

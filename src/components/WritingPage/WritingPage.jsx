@@ -4,13 +4,15 @@ import { withStyles } from '@material-ui/core';
 
 import styles from './writingStyles/writingStyles';
 import Sidebar from "./Sidebar";
-import QuickView from './QuickView';
+import QuickView from './QuickView/QuickView';
 import TextEditor from "./TextEditor";
 
 function WritingPage(props) {
     const { classes } = props;
 
-    const [ selectedPage, setSelectedPage ] = useState(null)
+    const [ selectedPage, setSelectedPage ] = useState(null);
+
+    const [ chapters, setChapters ] = useState(['The Begining', 'Time for Change']);
 
     return (
         <div className={classes.container}>
@@ -22,7 +24,7 @@ function WritingPage(props) {
                     {selectedPage === 'new_text' && 
                         <>
                             <div className={classes.quickView}>
-                                <QuickView />
+                                <QuickView chapters={chapters} setChapters={setChapters} />
                             </div>  
                             <div className={classes.editor}>
                                 <TextEditor />
