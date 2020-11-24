@@ -11,8 +11,10 @@ function WritingPage(props) {
     const { classes } = props;
 
     const [ selectedPage, setSelectedPage ] = useState(null);
+    const [ title, setTitle ] = useState('')
+    const [ selectedChapter, setSelectedChapter ] = useState(null);
 
-    const [ chapters, setChapters ] = useState(['The Begining', 'Time for Change']);
+    const [ chapters, setChapters ] = useState([]);
 
     return (
         <div className={classes.container}>
@@ -24,10 +26,10 @@ function WritingPage(props) {
                     {selectedPage === 'new_text' && 
                         <>
                             <div className={classes.quickView}>
-                                <QuickView chapters={chapters} setChapters={setChapters} />
+                                <QuickView chapters={chapters} selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} />
                             </div>  
                             <div className={classes.editor}>
-                                <TextEditor />
+                                <TextEditor selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} chapters={chapters} setChapters={setChapters} />
                             </div>
                         </>
                     }
