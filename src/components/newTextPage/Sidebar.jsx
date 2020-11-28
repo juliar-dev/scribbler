@@ -1,6 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core";
-import styles from "./writingStyles/sidebarStyles";
+import styles from "./newTextPage-Styles/sidebarStyles";
 
 import SearchIcon from '@material-ui/icons/Search';
 import PublishIcon from '@material-ui/icons/Publish';

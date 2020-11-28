@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { withStyles, AppBar, Toolbar  } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';

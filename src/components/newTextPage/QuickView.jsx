@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withStyles, TextField, Button } from "@material-ui/core";
-import styles from '../writingStyles/quickView';
+import styles from './newTextPage-Styles/quickView';
 
 function QuickView(props) {
     const { classes, chapters, setSelectedChapter, title } = props;
@@ -13,9 +13,9 @@ function QuickView(props) {
                     { title !== '' ? <p>{title}</p> : <p>Title</p> }
                     <ul className={classes.chapterList}>
                         { 
-                            chapters.length > 0 ? chapters.map((chapter) => <Button key={`${chapter.title}`} onClick={() => setSelectedChapter(chapter)} >{chapter.title}</Button>) 
+                            chapters.length > 0 ? chapters.map((chapter) => <Button key={`${chapter.title}`} onClick={() => setSelectedChapter(chapter)} >{chapter.title !== '' ? chapter.title : 'Chapter'}</Button>) 
                             : 
-                            <Button onClick={() => setSelectedChapter({title: '', text: ''})}>Chapter One</Button> 
+                            <Button disabled placeholder='Chapter'>Chapter One</Button> 
                         }
                     </ul>
                 </div>

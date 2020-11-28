@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { withStyles } from '@material-ui/core';
 // import PublishIcon from '@material-ui/icons/Publish';
 
-import styles from './writingStyles/writingStyles';
+import styles from './newTextPage-Styles/writingStyles';
 import Sidebar from "./Sidebar";
-import QuickView from './QuickView/QuickView';
+import QuickView from './QuickView';
 import TextEditor from "./TextEditor";
 
 function WritingPage(props) {
     const { classes } = props;
 
-    const [ selectedPage, setSelectedPage ] = useState(null);
+    const [ selectedPage, setSelectedPage ] = useState("new_text");
     const [ title, setTitle ] = useState('')
     const [ selectedChapter, setSelectedChapter ] = useState(null);
 
