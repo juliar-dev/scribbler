@@ -3,15 +3,20 @@ import { Editor, EditorState, RichUtils } from 'draft-js';
 
 import { Button, FormControl, Input, withStyles } from "@material-ui/core";
 import styles from './newTextPage-Styles/textEditorStyles';
+import createStyles from 'draft-js-custom-styles';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
+
+import FontSizeSetter from './editorTools/FontSizeSetter';
+import TextStyleSetter from './editorTools/TextStyleSetter';
 
 function TextEditor(props) {
     const { classes, selectedChapter, setSelectedChapter, title, setTitle, chapters, setChapters } = props;
 
     const [ newChapterTitle, setNewChapterTitle ] = useState('');
-
     const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
+
+    const {styles, customStyleFn} = createStyles(['font-size'])
 
     function handleBlur(e) {
         const { value } = e.target;
@@ -54,28 +59,6 @@ function TextEditor(props) {
         return 'not-handled';
     }
 
-    function onRichStyleClick(e) {
-        const { id } = e.target;
-        e.preventDefault();
-        let style;
-
-        switch(id) {
-            case 'italic' :
-            style = 'ITALIC';
-            break;
-            case 'bold' : 
-            style = 'BOLD';
-            break;
-            case 'underline' :
-            style = 'UNDERLINE';
-            break;
-            default : 
-            return;
-        }
-
-        onChange(RichUtils.toggleInlineStyle(editorState, style));
-    }
-
     return (
         <div className={classes.container}>
             {
@@ -84,15 +67,8 @@ function TextEditor(props) {
                         <div className={classes.editorTools}>
                             <em><UndoIcon /></em>
                             <em><RedoIcon /></em>
-                            <button id='underline' onMouseDown={(e) => onRichStyleClick(e)}>
-                                <em>U</em>
-                            </button>
-                            <button id='bold' onMouseDown={(e) => onRichStyleClick(e)}>
-                                <em>B</em>
-                            </button>
-                            <button id='italic' onMouseDown={(e) => onRichStyleClick(e)}>
-                                <em>I</em>
-                            </button>
+                            <FontSizeSetter editorState={editorState} setEditorState={setEditorState} styles={styles}/>
+                            <TextStyleSetter editorState={editorState} setEditorState={setEditorState} />
                         </div>
                         <FormControl onSubmit={handleBlur}>
                             <Input className={classes.title} placeholder={title} value={title} />
@@ -105,7 +81,7 @@ function TextEditor(props) {
                                 disabled={selectedChapter && selectedChapter.title.length > 0} />
                             <Button disabled={!chapters.every(chapter => chapter.title !== '')} onClick={addNewChapter}>+</Button>
                         </FormControl>
-                        <Editor editorState={editorState} onChange={onChange} handleKeyCommand={handleKeyCommand} />
+                        <Editor editorState={editorState} onChange={onChange} handleKeyCommand={handleKeyCommand} customStyleFn={customStyleFn} />
                     </div> 
                 : 
                     <div>
