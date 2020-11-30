@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { EditorState, RichUtils } from 'draft-js';
+import React from "react";
+import { RichUtils } from 'draft-js';
 
 import { withStyles } from "@material-ui/core";
 import styles from '../newTextPage-Styles/textEditorStyles';
 
 function TextStyleSetter(props) {
     const { classes, editorState, setEditorState } = props;
-
-    // const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
 
     function onChange(editorState) {
         setEditorState(editorState);

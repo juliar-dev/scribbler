@@ -20,6 +20,7 @@ function FontSizeSetter(props) {
     }
 
     function setFontSize(e, value) {
+        console.log(value)
         e.preventDefault();
         setCurrentFontSize(value.substring(0, 2));
         const newEditorState = styles.fontSize.remove(editorState);
@@ -37,7 +38,7 @@ function FontSizeSetter(props) {
                                         {isShowingFontSizeMenu && fontSizes.map(size => {
                                             return <div className={classes.fontSizeOption} 
                                                         key={`font-size-${size}`} 
-                                                        onClick={(e) => setFontSize(e, `${size}px`)} >
+                                                        onMouseDown={e => setFontSize(e, `${size}px`)} >
                                                             {size.toString()}
                                                     </div>
                                         })}
