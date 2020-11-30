@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Editor, EditorState, RichUtils } from 'draft-js';
 
-import { Button, FormControl, Input, withStyles } from "@material-ui/core";
+import { Button, FormControl, Input, Typography, withStyles } from "@material-ui/core";
 import styles from './newTextPage-Styles/textEditorStyles';
 import createStyles from 'draft-js-custom-styles';
-import UndoIcon from '@material-ui/icons/Undo';
-import RedoIcon from '@material-ui/icons/Redo';
 
+import UndoRedoSetter from './editorTools/UndoRedoSetter';
 import FontSizeSetter from './editorTools/FontSizeSetter';
 import TextStyleSetter from './editorTools/TextStyleSetter';
+import Highlighter from './editorTools/Highlighter';
+import BulletPointSetter from './editorTools/BulletPointSetter';
+import TextAlignmentSetter from './editorTools/TextAlignmentSetter';
 
 function TextEditor(props) {
     const { classes, selectedChapter, setSelectedChapter, title, setTitle, chapters, setChapters } = props;
@@ -16,7 +18,13 @@ function TextEditor(props) {
     const [ newChapterTitle, setNewChapterTitle ] = useState('');
     const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
 
-    const {styles, customStyleFn} = createStyles(['font-size'])
+    const {styles, customStyleFn} = createStyles(['font-size']);
+
+    const styleMap = {
+        'HIGHLIGHT': {
+            'backgroundColor': '#faed27',
+        }
+    };
 
     function handleBlur(e) {
         const { value } = e.target;
@@ -30,7 +38,6 @@ function TextEditor(props) {
         if (chapters.length === 0) {
             setChapters(chapters => [...chapters, newChapter]);
         } else {
-            console.log(e.target)
             let newChapters = [...chapters];
             newChapters.map(chapter => {
                 chapter.title === '' ? chapter.title = value : chapter.title = chapter.title;
@@ -62,31 +69,48 @@ function TextEditor(props) {
     return (
         <div className={classes.container}>
             {
-                selectedChapter && selectedChapter !== 0 ? 
+                selectedChapter && selectedChapter !== 0 && selectedChapter.title !== '' ? 
                     <div className={classes.textEditor} >
                         <div className={classes.editorTools}>
-                            <em><UndoIcon /></em>
-                            <em><RedoIcon /></em>
-                            <FontSizeSetter editorState={editorState} setEditorState={setEditorState} styles={styles}/>
-                            <TextStyleSetter editorState={editorState} setEditorState={setEditorState} />
-                        </div>
-                        <FormControl onSubmit={handleBlur}>
-                            <Input className={classes.title} placeholder={title} value={title} />
-                            <Input
-                                className={classes.chapterTitle} 
-                                placeholder={selectedChapter.title} 
-                                value={selectedChapter && selectedChapter.title !== '' ? selectedChapter.title : newChapterTitle} 
-                                onChange={(e) => setNewChapterTitle(e.target.value)} 
-                                onBlur={(e) => handleBlur(e)}
-                                disabled={selectedChapter && selectedChapter.title.length > 0} />
                             <Button disabled={!chapters.every(chapter => chapter.title !== '')} onClick={addNewChapter}>+</Button>
-                        </FormControl>
-                        <Editor editorState={editorState} onChange={onChange} handleKeyCommand={handleKeyCommand} customStyleFn={customStyleFn} />
+                            <UndoRedoSetter />
+                            <FontSizeSetter editorState={editorState} setEditorState={setEditorState} styles={styles}/>
+                            <TextStyleSetter editorState={editorState} onChange={onChange}/>
+                            <Highlighter editorState={editorState} onChange={onChange} styles={styles}/>
+                            <BulletPointSetter editorState={editorState} onChange={onChange} styles={styles} />
+                            <TextAlignmentSetter editorState={editorState} onChange={onChange} />
+                        </div>
+                        <div className={classes.textField}>
+                            <FormControl onSubmit={handleBlur}>
+                                <Typography variant="h2" >{selectedChapter.title}</Typography>
+                                {/* <Input
+                                    className={classes.chapterTitle} 
+                                    placeholder={selectedChapter.title} 
+                                    value={selectedChapter && selectedChapter.title !== '' ? selectedChapter.title : newChapterTitle} 
+                                    onChange={(e) => setNewChapterTitle(e.target.value)} 
+                                    onBlur={(e) => handleBlur(e)}
+                                    disabled={selectedChapter && selectedChapter.title.length > 0} /> */}                            </FormControl>
+                            <div className={classes.editor}>
+                                <Editor 
+                                    editorState={editorState} 
+                                    onChange={onChange} 
+                                    handleKeyCommand={handleKeyCommand} 
+                                    customStyleFn={customStyleFn} 
+                                    customStyleMap={styleMap} 
+                                />
+                            </div>
+                        </div>
                     </div> 
                 : 
                     <div>
                         <FormControl onSubmit={handleBlur}>
-                            <Input className={classes.title} placeholder='Title' value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <Input 
+                                className={classes.title} 
+                                placeholder='Title' 
+                                value={title} 
+                                onChange={(e) => setTitle(e.target.value)} 
+                                required
+                                />
                             {'\n'}
                             <Input 
                                 className={classes.chapterTitle} 
@@ -95,7 +119,9 @@ function TextEditor(props) {
                                 onBlur={handleBlur} 
                                 onSubmit={handleBlur}
                                 placeholder='Chapter One' 
-                                readOnly={selectedChapter && selectedChapter.title.length > 0} />
+                                readOnly={selectedChapter && selectedChapter.title.length > 0} 
+                                required
+                                />
                         </FormControl>
                     </div>
             }

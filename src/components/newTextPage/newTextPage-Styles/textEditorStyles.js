@@ -2,17 +2,31 @@ import colors from '../../../styles/colors';
 
 const styles = theme => ({
     container: {
-        backgroundImage: `url(${require('../../../assets/ricepaper_v3.png')})`
+        // backgroundImage: `url(${require('../../../assets/ricepaper_v3.png')})`,
+        background: "white"
     },
     textEditor: {
+        display: "grid",
+        gridTemplateRows: "auto",
+        gridTemplateColumns: "40px auto"
     },
     editorTools: {
-        background: colors.label
+        position: "abolute",
+        zIndex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+        width: theme.spacing(5),
     },
+    editor: {
+        height: "76vh",
+        overflowY: "scroll"
+    },
+
     fontSizeDropdown: {
         display: "inline-block",
     },
-    
     fontSizeMenu: {
         display: "inline-block",
         position: "relative",
