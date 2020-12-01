@@ -32,12 +32,14 @@ const styles = theme => ({
     editor: {
         height: "81vh",
         overflowY: "scroll",
+        cursor: "text",
         padding: `  0 ${theme.spacing(6)}px 
                     0  ${theme.spacing(10)}px`,
     },
     '@global': {
         '*::-webkit-scrollbar': {
-            width: '0.4em'
+            width: '0.4em',
+            cursor: 'pointer'
         },
         '*::-webkit-scrollbar-track': {
             '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.5)'

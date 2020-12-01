@@ -17,7 +17,6 @@ function BulletPointSetter(props) {
     function onBulletPointSetterClick(e, name) {
         e.preventDefault();
         onChange(RichUtils.toggleBlockType(editorState, `${name}-list-item`));
-        console.log(name)
         name === "unordered" ? setBulletIcon(<FormatListBulletedIcon />) : setBulletIcon(<FormatListNumberedIcon />);
         setIsShowingBulletPointMenu(false);
     }
