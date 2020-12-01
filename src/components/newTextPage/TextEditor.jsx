@@ -102,13 +102,6 @@ function TextEditor(props) {
                         <div className={classes.textField}>
                             <FormControl onSubmit={handleBlur}>
                                 <Typography variant="h2" >{selectedChapter.title}</Typography>
-                                {/* <Input
-                                    className={classes.chapterTitle} 
-                                    placeholder={selectedChapter.title} 
-                                    value={selectedChapter && selectedChapter.title !== '' ? selectedChapter.title : newChapterTitle} 
-                                    onChange={(e) => setNewChapterTitle(e.target.value)} 
-                                    onBlur={(e) => handleBlur(e)}
-                                    disabled={selectedChapter && selectedChapter.title.length > 0} /> */}                       
                             </FormControl>
                             <div className={classes.editor} onClick={() => {textInput.current.focus()}}>
                                 <div className={editorAlignmentClass}>
