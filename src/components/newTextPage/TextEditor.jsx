@@ -5,6 +5,11 @@ import { Button, FormControl, Input, Typography, withStyles } from "@material-ui
 import styles from './newTextPage-Styles/textEditorStyles';
 import createStyles from 'draft-js-custom-styles';
 
+import AddIcon from '@material-ui/icons/Add';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+import ImageIcon from '@material-ui/icons/Image';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import UndoRedoSetter from './editorTools/UndoRedoSetter';
 import FontSizeSetter from './editorTools/FontSizeSetter';
 import TextStyleSetter from './editorTools/TextStyleSetter';
@@ -17,6 +22,7 @@ function TextEditor(props) {
 
     const [ newChapterTitle, setNewChapterTitle ] = useState('');
     const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
+    const [ editorAlignmentClass, setEditorAlignmentClass ] = useState(classes.left);
 
     const {styles, customStyleFn} = createStyles(['font-size']);
 
@@ -72,13 +78,24 @@ function TextEditor(props) {
                 selectedChapter && selectedChapter !== 0 && selectedChapter.title !== '' ? 
                     <div className={classes.textEditor} >
                         <div className={classes.editorTools}>
-                            <Button disabled={!chapters.every(chapter => chapter.title !== '')} onClick={addNewChapter}>+</Button>
+                            <Button disabled={!chapters.every(chapter => chapter.title !== '')} onClick={addNewChapter}>
+                                <AddIcon />
+                            </Button>
                             <UndoRedoSetter />
                             <FontSizeSetter editorState={editorState} setEditorState={setEditorState} styles={styles}/>
                             <TextStyleSetter editorState={editorState} onChange={onChange}/>
                             <Highlighter editorState={editorState} onChange={onChange} styles={styles}/>
                             <BulletPointSetter editorState={editorState} onChange={onChange} styles={styles} />
-                            <TextAlignmentSetter editorState={editorState} onChange={onChange} />
+                            <TextAlignmentSetter setEditorAlignmentClass={setEditorAlignmentClass} />
+                            <Button>
+                                <AttachFileIcon />
+                            </Button>
+                            <Button>
+                                <ImageIcon />
+                            </Button>
+                            <Button>
+                                <DeleteIcon />
+                            </Button>
                         </div>
                         <div className={classes.textField}>
                             <FormControl onSubmit={handleBlur}>
@@ -89,15 +106,18 @@ function TextEditor(props) {
                                     value={selectedChapter && selectedChapter.title !== '' ? selectedChapter.title : newChapterTitle} 
                                     onChange={(e) => setNewChapterTitle(e.target.value)} 
                                     onBlur={(e) => handleBlur(e)}
-                                    disabled={selectedChapter && selectedChapter.title.length > 0} /> */}                            </FormControl>
+                                    disabled={selectedChapter && selectedChapter.title.length > 0} /> */}                       
+                            </FormControl>
                             <div className={classes.editor}>
-                                <Editor 
-                                    editorState={editorState} 
-                                    onChange={onChange} 
-                                    handleKeyCommand={handleKeyCommand} 
-                                    customStyleFn={customStyleFn} 
-                                    customStyleMap={styleMap} 
-                                />
+                                <div className={editorAlignmentClass}>
+                                    <Editor 
+                                        editorState={editorState} 
+                                        onChange={onChange} 
+                                        handleKeyCommand={handleKeyCommand} 
+                                        customStyleFn={customStyleFn} 
+                                        customStyleMap={styleMap} 
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div> 

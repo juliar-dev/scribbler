@@ -10,7 +10,9 @@ const colors = {
     nav: 'rgb(41, 41, 41)',
 
     backing: 'rgb(29, 29, 29)',
-    editBacking: 'rgb(220, 220, 220)'
+    editBacking: 'rgb(220, 220, 220)',
+    subSidbar: 'rgb(42, 42, 42)',
+    toolBar: 'rgb(61, 61, 61)',
 }
 
 export default colors

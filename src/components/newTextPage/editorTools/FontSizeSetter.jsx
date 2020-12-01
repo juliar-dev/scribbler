@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 import styles from '../newTextPage-Styles/textEditorStyles';
 
-import { withStyles } from "@material-ui/core";
+import { Button, withStyles } from "@material-ui/core";
 
 function FontSizeSetter(props) {
     const { classes, editorState, setEditorState, styles } = props;
@@ -28,9 +28,9 @@ function FontSizeSetter(props) {
 
     return (
         <div className={classes.fontSizeDropdown} styles={styles}>
-            <button onMouseDown={(e) => conditionallyRenderDropdown(e)}> 
+            <Button onMouseDown={(e) => conditionallyRenderDropdown(e)}> 
                 {currentFontSize} | v
-            </button>
+            </Button>
             <div className={classes.fontSizeMenu}>
                 {isShowingFontSizeMenu && fontSizes.map(size => {
                     return <div className={classes.fontSizeOption} key={`font-size-${size}`} onMouseDown={e => setFontSize(e, `${size}px`)}>

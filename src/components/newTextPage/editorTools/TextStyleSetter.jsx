@@ -1,7 +1,7 @@
 import React from "react";
 import { RichUtils } from 'draft-js';
 
-import { withStyles } from "@material-ui/core";
+import { Button, withStyles } from "@material-ui/core";
 import styles from '../newTextPage-Styles/textEditorStyles';
 
 import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
@@ -34,16 +34,16 @@ function TextStyleSetter(props) {
     }
 
     return (
-        <div className={classes.container}>
-            <button id='underline' onMouseDown={(e) => onRichStyleClick(e)}>
-                <em><FormatUnderlinedIcon /></em>
-            </button>
-            <button id='bold' onMouseDown={(e) => onRichStyleClick(e)}>
-                <em><FormatBoldIcon /></em>
-            </button>
-            <button id='italic' onMouseDown={(e) => onRichStyleClick(e)}>
-                <em><FormatItalicIcon /></em>
-            </button>
+        <div className={classes.textStyleSetter}>
+            <Button id='underline' onMouseDown={(e) => onRichStyleClick(e)}>
+                <FormatUnderlinedIcon />
+            </Button>
+            <Button id='bold' onMouseDown={(e) => onRichStyleClick(e)}>
+                <FormatBoldIcon />
+            </Button>
+            <Button id='italic' onMouseDown={(e) => onRichStyleClick(e)}>
+                <FormatItalicIcon />
+            </Button>
         </div>
     )
 }

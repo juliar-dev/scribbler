@@ -4,15 +4,14 @@ const styles = theme => ({
     content: {
         width: "auto",
         display: "block",
-        // marginLeft: theme.spacing(4),
-        // marginRight: theme.spacing(4),
-        background: colors.editBacking
+        background: colors.subSidbar,
+        color: colors.editBacking
     },
     dashboard: {
         display: 'grid',
         gridTemplateRows: 'auto',
         gridTemplateColumns: "15vw 20vw auto",
-        marginTop: theme.spacing(6)
+        marginTop: theme.spacing(5.5)
     },
     sidebar: {
         gridRow: '1 / 1',

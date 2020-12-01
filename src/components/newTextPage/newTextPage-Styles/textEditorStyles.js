@@ -2,13 +2,13 @@ import colors from '../../../styles/colors';
 
 const styles = theme => ({
     container: {
-        // backgroundImage: `url(${require('../../../assets/ricepaper_v3.png')})`,
-        background: "white"
+        background: colors.editBacking
     },
     textEditor: {
         display: "grid",
         gridTemplateRows: "auto",
-        gridTemplateColumns: "40px auto"
+        gridTemplateColumns: "40px auto",
+        color: colors.toolBar
     },
     editorTools: {
         position: "abolute",
@@ -17,13 +17,48 @@ const styles = theme => ({
         flexDirection: "column",
         alignItems: "flex-start",
         justifyContent: "flex-start",
-        width: theme.spacing(5),
+        width: theme.spacing(8),
+        borderRight: "1px solid black",
+        background: colors.toolBar,
+        '& button': {
+            background: "none",
+            color: colors.editBacking
+        },
+        '& button:hover': {
+            background: 'white',
+            color: 'black'
+        }
     },
     editor: {
-        height: "76vh",
-        overflowY: "scroll"
+        height: "81vh",
+        overflowY: "scroll",
+        padding: `  0 ${theme.spacing(6)}px 
+                    0  ${theme.spacing(10)}px`,
     },
-
+    '@global': {
+        '*::-webkit-scrollbar': {
+            width: '0.4em'
+        },
+        '*::-webkit-scrollbar-track': {
+            '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.5)'
+        },
+        '*::-webkit-scrollbar-thumb': {
+            backgroundColor: 'rgba(0,0,0,.5)',
+            outline: '1px solid slategrey'
+        }
+    },
+    left: {
+        textAlign: "left"
+    },
+    right: {
+        textAlign: 'right'
+    },
+    center: {
+        textAlign: 'center'
+    },
+    justify: {
+        textAlign: 'justify'
+    },
     fontSizeDropdown: {
         display: "inline-block",
     },
@@ -35,12 +70,7 @@ const styles = theme => ({
         boxShadow: "0 0 2px",
         maxHeight: "150px",
         overflowY: "scroll",
-    },
-    
-    // fontSizeMenu::-webkitScrollbar: {
-    //     display: none
-    // },
-    
+    },  
     fontSizeOption: {
         padding: "3px",
         '&::hover': {

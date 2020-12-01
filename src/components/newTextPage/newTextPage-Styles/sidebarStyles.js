@@ -7,12 +7,9 @@ const styles = theme => ({
         gridTemplateColumns: "auto",
         alignItems: "start",
         textAlign: "center",
-        marginLeft: theme.spacing(1),
-        // padding: `0 ${theme.spacing(2)}px`,
         width: "14vw",
-        height: "90vh",
+        height: "91vh",
         background: colors.backing,
-        borderRadius: "5px",
     },
     sidebarChild: {
         margin: 0,

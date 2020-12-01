@@ -1,7 +1,14 @@
 const styles = theme => ({
     chapterList: {
         listStyle: "none",
-        textAlign: "left"
+        textAlign: "left",
+        '& button': {
+            color: 'white',
+            textTransform: "capitalize",
+            textAlign: "left",
+            cursor: "pointer",
+            display: "block"
+        }
     }
 })
 

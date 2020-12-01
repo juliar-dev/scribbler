@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { RichUtils } from 'draft-js';
 
 import styles from '../newTextPage-Styles/textEditorStyles';
-import { withStyles } from "@material-ui/core";
+import { Button, withStyles } from "@material-ui/core";
 
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
@@ -25,13 +25,12 @@ function BulletPointSetter(props) {
     return (
         <div className={classes.bulletPointSetter}>
             <div className={classes.bulletPointDropdown}>
-                <button onMouseDown={(e) => onBulletPointSetterClick(e, "unordered")}>{bulletIcon}</button>
-                <button onMouseDown={() => {setIsShowingBulletPointMenu(!isShowingBulletPointMenu)}}>| v</button>
+                <Button onMouseDown={() => {setIsShowingBulletPointMenu(!isShowingBulletPointMenu)}}>{bulletIcon}| v</Button>
             </div>
                 {isShowingBulletPointMenu && 
                 <div className={classes.bulletPointMenu}>
-                    <button onMouseDown={(e) => onBulletPointSetterClick(e, "unordered")}><FormatListBulletedIcon /></button>
-                    <button onMouseDown={(e) => onBulletPointSetterClick(e, "ordered")}><FormatListNumberedIcon /></button>
+                    <Button onMouseDown={(e) => onBulletPointSetterClick(e, "unordered")}><FormatListBulletedIcon /></Button>
+                    <Button onMouseDown={(e) => onBulletPointSetterClick(e, "ordered")}><FormatListNumberedIcon /></Button>
                 </div>
                 }
         </div>

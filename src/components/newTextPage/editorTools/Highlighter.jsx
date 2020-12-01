@@ -2,7 +2,7 @@ import React from 'react'
 import { RichUtils } from 'draft-js';
 
 import styles from '../newTextPage-Styles/textEditorStyles';
-import { withStyles } from "@material-ui/core";
+import { Button, withStyles } from "@material-ui/core";
 
 import HighlightIcon from '@material-ui/icons/Highlight';
 
@@ -17,7 +17,7 @@ function Highlighter(props) {
 
     return (
         <div className={classes.highlighter}>
-            <button onMouseDown={(e) => onHighlightTextClick(e)}><HighlightIcon /></button>
+            <Button onMouseDown={(e) => onHighlightTextClick(e)}><HighlightIcon /></Button>
         </div>
     )
 }
