@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Editor, EditorState, RichUtils } from 'draft-js';
 
 import { Button, FormControl, Input, Typography, withStyles } from "@material-ui/core";
@@ -19,6 +19,8 @@ import TextAlignmentSetter from './editorTools/TextAlignmentSetter';
 
 function TextEditor(props) {
     const { classes, selectedChapter, setSelectedChapter, title, setTitle, chapters, setChapters } = props;
+
+    const textInput = useRef();
 
     const [ newChapterTitle, setNewChapterTitle ] = useState('');
     const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
@@ -108,14 +110,15 @@ function TextEditor(props) {
                                     onBlur={(e) => handleBlur(e)}
                                     disabled={selectedChapter && selectedChapter.title.length > 0} /> */}                       
                             </FormControl>
-                            <div className={classes.editor}>
+                            <div className={classes.editor} onClick={() => {textInput.current.focus()}}>
                                 <div className={editorAlignmentClass}>
                                     <Editor 
                                         editorState={editorState} 
                                         onChange={onChange} 
                                         handleKeyCommand={handleKeyCommand} 
                                         customStyleFn={customStyleFn} 
-                                        customStyleMap={styleMap} 
+                                        customStyleMap={styleMap}
+                                        ref={textInput}
                                     />
                                 </div>
                             </div>
