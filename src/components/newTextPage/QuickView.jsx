@@ -28,7 +28,7 @@ class QuickView extends React.Component {
 
     Item ({decorateHandle, removable, onChange, onRemove, value, onClick}) {
         return (
-            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', gridTemplateRows: '50px', gridRow: '1 / 1' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', gridTemplateRows: '50px' }}>
                 <CustomInput value={value} onChange={onChange} onBlur={selectedChapterSetter(value)} onClick={onClick} />
                 {decorateHandle(<span style={{cursor: 'move'}}><OpenWithIcon /></span>)}
                 <span
@@ -42,7 +42,7 @@ class QuickView extends React.Component {
 
     StagingItem ({value, onAdd, canAdd, add, onChange}) {
         return (
-            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridTemplateRows: '50px', gridRow: '2 / 2' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridTemplateRows: '50px' }}>
                 <CustomInput value={value} onChange={onChange} />
                 <span
                     onClick={canAdd ? onAdd : undefined}
@@ -55,8 +55,9 @@ class QuickView extends React.Component {
     }
 
     render() {
-        const { value } = this.state
-        const { classes, chapters, setSelectedChapter, title } = this.props;
+        const { classes, title } = this.props;
+
+        console.log(this.state.value)
 
         return (
             <div className={classes.container}>
@@ -67,8 +68,8 @@ class QuickView extends React.Component {
                             <ReactListInput
                                 initialStagingValue=''
                                 onChange={value => this.setState({value})}
-                                // maxItems={}
-                                // minItems={}
+                                maxItems={Infinity}
+                                minItems={1}
                                 ItemComponent={this.Item}
                                 StagingComponent={this.StagingItem}
                                 value={this.state.value}

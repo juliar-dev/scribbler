@@ -1,4 +1,6 @@
 const styles = theme => ({
+    container: {
+    },
     title: {
         borderBottom: "1px solid white",
         paddingBottom: theme.spacing(10)
@@ -8,6 +10,7 @@ const styles = theme => ({
         textAlign: "left",
         height: "70vh",
         overflowY: "scroll",
+        paddingRight: theme.spacing(4),
         '& input': {
             color: 'white',
             textTransform: "capitalize",
