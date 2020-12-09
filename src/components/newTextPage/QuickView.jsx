@@ -12,7 +12,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 let selectedChapterSetter;
 
 const CustomInput = ({ value, onChange, type, onClick }) => 
-        <Input type={type} value={value} onChange={e => onChange(e.target.value)} onClick={() => selectedChapterSetter(value)} />
+        <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} type={type} value={value} onChange={e => onChange(e.target.value)} onClick={() => selectedChapterSetter(value)} />
 
 class QuickView extends React.Component {
     constructor (props) {
@@ -28,7 +28,7 @@ class QuickView extends React.Component {
 
     Item ({decorateHandle, removable, onChange, onRemove, value, onClick}) {
         return (
-            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', gridTemplateRows: '50px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '75% 15% 10%', gridTemplateRows: '40px' }}>
                 <CustomInput value={value} onChange={onChange} onBlur={selectedChapterSetter(value)} onClick={onClick} />
                 {decorateHandle(<span style={{cursor: 'move'}}><OpenWithIcon /></span>)}
                 <span
@@ -42,7 +42,7 @@ class QuickView extends React.Component {
 
     StagingItem ({value, onAdd, canAdd, add, onChange}) {
         return (
-            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridTemplateRows: '50px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridTemplateRows: '40px' }}>
                 <CustomInput value={value} onChange={onChange} />
                 <span
                     onClick={canAdd ? onAdd : undefined}
@@ -55,7 +55,7 @@ class QuickView extends React.Component {
     }
 
     render() {
-        const { classes, title } = this.props;
+        const { classes, title, setTitle } = this.props;
 
         console.log(this.state.value)
 
@@ -63,7 +63,7 @@ class QuickView extends React.Component {
             <div className={classes.container}>
                 <div className={classes.content}>
                     <div className={classes.main}>
-                        { title !== '' ? <p className={classes.title}>{title}</p> : <p className={classes.title}>Title</p> }
+                        <Input className={classes.title} placeholder="Title" value={title} onChange={e => {setTitle(e.target.value)}} />
                         <ul className={classes.chapterList}>  
                             <ReactListInput
                                 initialStagingValue=''

@@ -3,7 +3,9 @@ const styles = theme => ({
     },
     title: {
         borderBottom: "1px solid white",
-        paddingBottom: theme.spacing(10)
+        color: "white",
+        margin: `${theme.spacing(2)}px 0`,
+        padding: `0 ${theme.spacing(2)}px`,
     },
     chapterList: {
         listStyle: "none",
@@ -17,7 +19,7 @@ const styles = theme => ({
             textAlign: "left",
             cursor: "pointer",
             display: "inline-block",
-        }
+        },
     },
 })
 

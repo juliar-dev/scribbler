@@ -26,7 +26,7 @@ function WritingPage(props) {
                     {selectedPage === 'new_text' && 
                         <>
                             <div className={classes.quickView}>
-                                <QuickView chapters={chapters} selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} />
+                                <QuickView chapters={chapters} selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} />
                             </div>  
                             <div className={classes.editor}>
                                 <TextEditor selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} chapters={chapters} setChapters={setChapters} />
