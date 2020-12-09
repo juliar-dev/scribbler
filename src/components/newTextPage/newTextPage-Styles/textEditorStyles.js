@@ -4,6 +4,12 @@ const styles = theme => ({
     container: {
         background: colors.editBacking
     },
+    prompt: {
+        background: colors.subSidbar,
+        color: colors.toolBar,
+        fontSize: '120%',
+        marginTop: theme.spacing(38)
+    },
     textEditor: {
         display: "grid",
         gridTemplateRows: "auto",

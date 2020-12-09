@@ -8,14 +8,14 @@ const styles = theme => ({
         textAlign: "left",
         height: "70vh",
         overflowY: "scroll",
-        '& button': {
+        '& input': {
             color: 'white',
             textTransform: "capitalize",
             textAlign: "left",
             cursor: "pointer",
-            display: "block",
+            display: "inline-block",
         }
-    }
+    },
 })
 
 export default styles;

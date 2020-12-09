@@ -79,7 +79,7 @@ function TextEditor(props) {
     return (
         <div className={classes.container}>
             {
-                selectedChapter && selectedChapter !== 0 && selectedChapter.title !== '' ? 
+                selectedChapter && selectedChapter !== 0 && selectedChapter !== '' ? 
                     <div className={classes.textEditor} >
                         <div className={classes.editorTools}>
                             <Button disabled={!chapters.every(chapter => chapter.title !== '')} onClick={addNewChapter}>
@@ -97,7 +97,7 @@ function TextEditor(props) {
                         </div>
                         <div className={classes.textField}>
                             <FormControl onSubmit={handleBlur}>
-                                <Typography className={classes.title} variant="h2">{selectedChapter.title}</Typography>
+                                <Typography className={classes.title} variant="h2">{selectedChapter}</Typography>
                             </FormControl>
                             <div className={classes.editor} onClick={() => {textInput.current.focus()}}>
                                 <div className={editorAlignmentClass}>
@@ -115,26 +115,7 @@ function TextEditor(props) {
                     </div> 
                 : 
                     <div>
-                        <FormControl onSubmit={handleBlur}>
-                            <Input 
-                                className={classes.title} 
-                                placeholder='Title' 
-                                value={title} 
-                                onChange={(e) => setTitle(e.target.value)} 
-                                required
-                                />
-                            {'\n'}
-                            <Input 
-                                className={classes.chapterTitle} 
-                                value={selectedChapter ? selectedChapter.title : newChapterTitle} 
-                                onChange={(e) => setNewChapterTitle(e.target.value)} 
-                                onBlur={handleBlur} 
-                                onSubmit={handleBlur}
-                                placeholder='Chapter One' 
-                                readOnly={selectedChapter && selectedChapter.title.length > 0} 
-                                required
-                                />
-                        </FormControl>
+                        <Typography className={classes.prompt} variant="h3">Add a chapter</Typography>
                     </div>
             }
         </div>
