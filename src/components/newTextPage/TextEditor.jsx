@@ -20,6 +20,8 @@ import TextAlignmentSetter from './editorTools/TextAlignmentSetter';
 function TextEditor(props) {
     const { classes, selectedChapter, setSelectedChapter, title, setTitle, chapters, setChapters } = props;
 
+    const paragraphs = document.querySelectorAll(".public-DraftStyleDefault-ltr");
+
     const textInput = useRef();
 
     const [ newChapterTitle, setNewChapterTitle ] = useState('');
@@ -88,20 +90,14 @@ function TextEditor(props) {
                             <TextStyleSetter editorState={editorState} onChange={onChange}/>
                             <Highlighter editorState={editorState} onChange={onChange} styles={styles}/>
                             <BulletPointSetter editorState={editorState} onChange={onChange} styles={styles} />
-                            <TextAlignmentSetter setEditorAlignmentClass={setEditorAlignmentClass} />
-                            <Button>
-                                <AttachFileIcon />
-                            </Button>
-                            <Button>
-                                <ImageIcon />
-                            </Button>
-                            <Button>
-                                <DeleteIcon />
-                            </Button>
+                            <TextAlignmentSetter setEditorAlignmentClass={setEditorAlignmentClass} paragraphs={paragraphs}/>
+                            <Button><AttachFileIcon /></Button>
+                            <Button><ImageIcon /></Button>
+                            <Button><DeleteIcon /></Button>
                         </div>
                         <div className={classes.textField}>
                             <FormControl onSubmit={handleBlur}>
-                                <Typography variant="h2" >{selectedChapter.title}</Typography>
+                                <Typography className={classes.title} variant="h2">{selectedChapter.title}</Typography>
                             </FormControl>
                             <div className={classes.editor} onClick={() => {textInput.current.focus()}}>
                                 <div className={editorAlignmentClass}>
@@ -146,3 +142,6 @@ function TextEditor(props) {
 }
 
 export default withStyles(styles)(TextEditor);
+
+
+//TODO: Need to sort styling for text editor page.

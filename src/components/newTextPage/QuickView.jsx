@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { withStyles, TextField, Button } from "@material-ui/core";
+import React from "react";
+import { withStyles, Button } from "@material-ui/core";
 import styles from './newTextPage-Styles/quickView';
 
 function QuickView(props) {
@@ -9,11 +9,16 @@ function QuickView(props) {
         <div className={classes.container}>
             <div className={classes.content}>
                 <div className={classes.main}>
-                    {/* <button style={{  display: chapters.length !== 0 && chapters[chapters.length - 1].length === 0 ? 'none' : 'inline' }} className={classes.chapterAdder} onClick={addChapter}>+</button> */}
-                    { title !== '' ? <p>{title}</p> : <p>Title</p> }
+                    { title !== '' ? <p className={classes.title}>{title}</p> : <p className={classes.title}>Title</p> }
                     <ul className={classes.chapterList}>
                         { 
-                            chapters.length > 0 ? chapters.map((chapter) => <Button key={`${chapter.title}`} onClick={() => setSelectedChapter(chapter)} >{chapter.title !== '' ? chapter.title : 'Chapter'}</Button>) 
+                            chapters.length > 0 ? chapters.map((chapter) => {
+                                return (
+                                    <Button key={`${chapter.title}`} onClick={() => setSelectedChapter(chapter)}>
+                                        {chapter.title !== '' ? chapter.title : 'Chapter'}
+                                    </Button>
+                                )
+                            })
                             : 
                             <Button disabled placeholder='Chapter'>Chapter One</Button> 
                         }

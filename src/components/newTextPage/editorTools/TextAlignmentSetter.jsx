@@ -9,10 +9,23 @@ import FormatAlignRightIcon from '@material-ui/icons/FormatAlignRight';
 import FormatAlignJustifyIcon from '@material-ui/icons/FormatAlignJustify';
 
 function TextAlignmentSetter(props) {
-    const { classes, setEditorAlignmentClass } = props;
+    const { classes, setEditorAlignmentClass, paragraphs } = props;
 
     function onClickAlignOption(e, value) {
         e.preventDefault();
+        // console.log(paragraphs[0].innerText)
+        // paragraphs[0].innerText.split('').map(letter => {
+        //     console.log(letter)
+        //     letter.classList.add('newClass')
+        // });
+        // for (let i = 0; i < paragraphs.length; i++) {
+        //     const paragraph = paragraphs.item(i);
+        //     setEditorAlignmentClass(paragraph);
+        //     // if (paragraph) {
+        //     //     const firstItem = paragraph.querySelectorAll('*').item(0);
+        //     //     paragraph.style.textAlign = firstItem.style.textAlign;
+        //     // }
+        // }
         setEditorAlignmentClass(value);
     }
 

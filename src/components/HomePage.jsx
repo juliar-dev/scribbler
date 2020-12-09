@@ -22,7 +22,7 @@ function HomePage(props) {
             <div className={classes.content}>
                 <Nav myRef={myRef}/>
                 <main className={classes.main}>
-                    {user &&
+                    {!user ?
                     <>
                         <div className={classes.banner}>
                         <Typography className={classes.title} variant="h1">Build a writing community</Typography>
@@ -40,11 +40,14 @@ function HomePage(props) {
                             <AboutPage />
                         </div>
                     </>
-                    }
-                    <div className={classes.grid}>
+                    :
+                    <>
+                        <div className={classes.grid}>
                         <div className={classes.item1}>Explore</div>
-                        <Link to="/write"><div className={classes.item2}>Write</div></Link>
-                    </div>
+                            <Link to="/write"><div className={classes.item2}>Write</div></Link>
+                        </div>
+                    </>
+                    }
                 </main>
             </div>
         </div>

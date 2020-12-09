@@ -31,7 +31,7 @@ function HomePage(props) {
                             <Link style={LinkStyles()} to="/"><span className={classes.logo}><HomeIcon /></span></Link>
                             <Link style={LinkStyles()} to="/" onClick={executeScroll}><span>About</span></Link>
                             <Link style={LinkStyles()} to="/sign_in"><span>Log In</span></Link>
-                            {!user &&
+                            {user &&
                                 <>
                                     <Link style={LinkStyles()} to="/read_feed"><span>Explore</span></Link>
                                     <Link style={LinkStyles()} to="/write"><span>Write</span></Link>
