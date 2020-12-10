@@ -9,8 +9,6 @@ import OpenWithIcon from '@material-ui/icons/OpenWith';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 
-// const { classes, chapters, setSelectedChapter, title } = this.props;
-
 function QuickView (props) {
 
     const { classes, selectedChapter, setSelectedChapter, title, setTitle, saveAll } = props;

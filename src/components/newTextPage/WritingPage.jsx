@@ -19,7 +19,7 @@ function WritingPage(props) {
         let savedChapters = chapterTitles.map(chapterTitle => {
             return {title: chapterTitle, text: ''};
         })
-        console.log(savedChapters);
+        setChapters(savedChapters);
     }
 
     return (
