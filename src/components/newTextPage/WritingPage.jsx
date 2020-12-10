@@ -16,6 +16,10 @@ function WritingPage(props) {
 
     const [ chapters, setChapters ] = useState([]);
 
+    function handleDeleteAChapter() {
+        console.log(chapters);
+    }
+
     return (
         <div className={classes.container}>
             <div className={classes.content}>
@@ -26,7 +30,7 @@ function WritingPage(props) {
                     {selectedPage === 'new_text' && 
                         <>
                             <div className={classes.quickView}>
-                                <QuickView chapters={chapters} setChapters={setChapters} selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} />
+                                <QuickView chapters={chapters} setChapters={setChapters} handleDeleteAChapter={handleDeleteAChapter} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} />
                             </div>  
                             <div className={classes.editor}>
                                 <TextEditor selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} chapters={chapters} setChapters={setChapters} />

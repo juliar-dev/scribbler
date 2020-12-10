@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles, Button, Input } from "@material-ui/core";
 import styles from './newTextPage-Styles/quickView';
 
@@ -9,12 +9,18 @@ import OpenWithIcon from '@material-ui/icons/OpenWith';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 // const { classes, chapters, setSelectedChapter, title } = this.props;
-
+let newChapters;
 
 function QuickView (props) {
-    const { classes, chapters, setChapters, selectedChapter, setSelectedChapter, title, setTitle } = props;
+    const { classes, chapters, setChapters, handleDeleteAChapter, setSelectedChapter, title, setTitle } = props;
 
     const [ value, setValue ] = useState([]);
+    
+    console.log(chapters);
+
+    useEffect(() => {
+        newChapters = chapters;
+    }, [chapters])
 
     function handleChapters(value) {
         return value === '' ? null : setSelectedChapter(value);
@@ -33,7 +39,9 @@ function QuickView (props) {
     }
 
     function handleDeleteChapter(removable, onRemove, value) {
-        console.log('hello')
+        const filteredChapters = newChapters.filter(chapter => chapter.title !== value);
+        setChapters(filteredChapters);
+        return removable ? onRemove() : x => x
     }
 
     function Item ({decorateHandle, removable, onChange, onRemove, value, onClick}) {
@@ -42,7 +50,7 @@ function QuickView (props) {
                 <CustomInput value={value} onChange={onChange} onBlur={handleBlur(value)} onClick={onClick} />
                 {decorateHandle(<span style={{cursor: 'move'}}><OpenWithIcon /></span>)}
                 <span
-                    onClick={removable ? onRemove : x => x}
+                    onClick={() => handleDeleteChapter(removable, onRemove, value)}
                     style={{
                         cursor: removable ? 'pointer' : 'not-allowed',
                     }}><DeleteIcon /></span>
