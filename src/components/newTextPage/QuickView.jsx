@@ -8,16 +8,13 @@ import AddIcon from '@material-ui/icons/Add';
 import OpenWithIcon from '@material-ui/icons/OpenWith';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-// const { classes, chapters, setSelectedChapter, title } = this.props;
 let newChapters;
 
 function QuickView (props) {
-    const { classes, chapters, setChapters, handleDeleteAChapter, setSelectedChapter, title, setTitle } = props;
+    const { classes, chapters, setChapters, setSelectedChapter, title, setTitle } = props;
 
     const [ value, setValue ] = useState([]);
     
-    console.log(chapters);
-
     useEffect(() => {
         newChapters = chapters;
     }, [chapters])

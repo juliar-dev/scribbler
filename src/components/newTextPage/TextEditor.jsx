@@ -18,7 +18,7 @@ import BulletPointSetter from './editorTools/BulletPointSetter';
 import TextAlignmentSetter from './editorTools/TextAlignmentSetter';
 
 function TextEditor(props) {
-    const { classes, selectedChapter, setSelectedChapter, title, setTitle, chapters, setChapters } = props;
+    const { classes, selectedChapter, setSelectedChapter, chapters, setChapters } = props;
 
     const paragraphs = document.querySelectorAll(".public-DraftStyleDefault-ltr");
 
