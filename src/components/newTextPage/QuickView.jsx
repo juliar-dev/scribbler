@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles, Button, Input } from "@material-ui/core";
 import styles from './newTextPage-Styles/quickView';
 
@@ -9,27 +9,37 @@ import OpenWithIcon from '@material-ui/icons/OpenWith';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 // const { classes, chapters, setSelectedChapter, title } = this.props;
-let selectedChapterSetter;
 
-const CustomInput = ({ value, onChange, type, onClick }) => 
-        <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} type={type} value={value} onChange={e => onChange(e.target.value)} onClick={() => selectedChapterSetter(value)} />
 
-class QuickView extends React.Component {
-    constructor (props) {
-        super(props)
-        this.state = {
-            value: [...this.props.chapters]
-        }
+function QuickView (props) {
+    const { classes, chapters, setChapters, selectedChapter, setSelectedChapter, title, setTitle } = props;
+
+    const [ value, setValue ] = useState([]);
+
+    function handleChapters(value) {
+        return value === '' ? null : setSelectedChapter(value);
     }
 
-    componentDidMount() {
-        selectedChapterSetter = this.props.setSelectedChapter;
+    const CustomInput = ({ value, onChange, type, onClick }) => 
+        <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} type={type} value={value} onChange={e => onChange(e.target.value)} onClick={() => handleChapters(value)} />
+
+    function handleBlur(value) {
+        setSelectedChapter(value);
+    }
+    
+    function handleAddChapter(canAdd, onAdd, value) {
+        setChapters(chapters => [...chapters, {title: value, text: ''}]);
+        return canAdd ? onAdd() : undefined
     }
 
-    Item ({decorateHandle, removable, onChange, onRemove, value, onClick}) {
+    function handleDeleteChapter(removable, onRemove, value) {
+        console.log('hello')
+    }
+
+    function Item ({decorateHandle, removable, onChange, onRemove, value, onClick}) {
         return (
             <div style={{ display: 'grid', gridTemplateColumns: '75% 15% 10%', gridTemplateRows: '40px' }}>
-                <CustomInput value={value} onChange={onChange} onBlur={selectedChapterSetter(value)} onClick={onClick} />
+                <CustomInput value={value} onChange={onChange} onBlur={handleBlur(value)} onClick={onClick} />
                 {decorateHandle(<span style={{cursor: 'move'}}><OpenWithIcon /></span>)}
                 <span
                     onClick={removable ? onRemove : x => x}
@@ -40,12 +50,12 @@ class QuickView extends React.Component {
         )
     }
 
-    StagingItem ({value, onAdd, canAdd, add, onChange}) {
+    function StagingItem ({value, onAdd, canAdd, add, onChange}) {
         return (
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridTemplateRows: '40px' }}>
                 <CustomInput value={value} onChange={onChange} />
                 <span
-                    onClick={canAdd ? onAdd : undefined}
+                    onClick={() => handleAddChapter(canAdd, onAdd, value)}
                     style={{
                         color: canAdd ? 'white' : 'gray',
                         cursor: canAdd ? 'pointer' : 'not-allowed'
@@ -54,10 +64,6 @@ class QuickView extends React.Component {
         )
     }
 
-    render() {
-        const { classes, title, setTitle } = this.props;
-
-        console.log(this.state.value)
 
         return (
             <div className={classes.container}>
@@ -67,12 +73,12 @@ class QuickView extends React.Component {
                         <ul className={classes.chapterList}>  
                             <ReactListInput
                                 initialStagingValue=''
-                                onChange={value => this.setState({value})}
+                                onChange={value => setValue(value)}
                                 maxItems={Infinity}
                                 minItems={1}
-                                ItemComponent={this.Item}
-                                StagingComponent={this.StagingItem}
-                                value={this.state.value}
+                                ItemComponent={Item}
+                                StagingComponent={StagingItem}
+                                value={value}
                             />
                         </ul>
                     </div>
@@ -80,6 +86,5 @@ class QuickView extends React.Component {
             </div>
         )
     }
-}
 
 export default withStyles(styles)(QuickView);
