@@ -15,6 +15,13 @@ function WritingPage(props) {
 
     const [ chapters, setChapters ] = useState([]);
 
+    function saveAll(chapterTitles, chapterContents) {
+        let savedChapters = chapterTitles.map(chapterTitle => {
+            return {title: chapterTitle, text: ''};
+        })
+        console.log(savedChapters);
+    }
+
     return (
         <div className={classes.container}>
             <div className={classes.content}>
@@ -25,7 +32,7 @@ function WritingPage(props) {
                     {selectedPage === 'new_text' && 
                         <>
                             <div className={classes.quickView}>
-                                <QuickView chapters={chapters} setChapters={setChapters} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} />
+                                <QuickView chapters={chapters} setChapters={setChapters} selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} saveAll={saveAll} />
                             </div>  
                             <div className={classes.editor}>
                                 <TextEditor selectedChapter={selectedChapter} setSelectedChapter={setSelectedChapter} title={title} setTitle={setTitle} chapters={chapters} setChapters={setChapters} />

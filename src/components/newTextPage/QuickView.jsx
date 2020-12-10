@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withStyles, Button, Input } from "@material-ui/core";
 import styles from './newTextPage-Styles/quickView';
 
@@ -7,49 +7,45 @@ import ReactListInput from 'react-list-input'
 import AddIcon from '@material-ui/icons/Add';
 import OpenWithIcon from '@material-ui/icons/OpenWith';
 import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
 
-let newChapters;
+// const { classes, chapters, setSelectedChapter, title } = this.props;
 
 function QuickView (props) {
-    const { classes, chapters, setChapters, setSelectedChapter, title, setTitle } = props;
+
+    const { classes, selectedChapter, setSelectedChapter, title, setTitle, saveAll } = props;
 
     const [ value, setValue ] = useState([]);
-    
-    useEffect(() => {
-        newChapters = chapters;
-    }, [chapters])
 
-    function handleChapters(value) {
-        const selectedChapter = newChapters.find(chapter => chapter.title === value);
-        return value === '' ? null : setSelectedChapter(selectedChapter);
+    const CustomInput = ({ value, onChange, type, onAdd, canAdd }) => 
+        <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} 
+                type={type} 
+                value={value} 
+                onChange={e => handleChange(onChange, e.target.value)} 
+                onBlur={(e) => handleBlur(e.target.value, onAdd, canAdd)} 
+                onClick={(e) => handleClick(e.target.value)}
+        />
+
+    function handleChange(change, value) {
+        change(value);
     }
 
-    const CustomInput = ({ value, onChange, type, onClick }) => 
-        <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} type={type} value={value} onChange={e => onChange(e.target.value)} onClick={() => handleChapters(value)} />
-
-    function handleBlur(value) {
-        const selectedChapter = newChapters.find(chapter => chapter.title === value);
-        setSelectedChapter(selectedChapter);
-    }
-    
-    function handleAddChapter(canAdd, onAdd, value) {
-        setChapters(chapters => [...chapters, {title: value, text: ''}]);
-        return canAdd ? onAdd() : undefined
+    function handleBlur(value, onAdd, canAdd) {
+        setSelectedChapter(value);
+        return canAdd ? onAdd() : undefined;
     }
 
-    function handleDeleteChapter(removable, onRemove, value) {
-        const filteredChapters = newChapters.filter(chapter => chapter.title !== value);
-        setChapters(filteredChapters);
-        return removable ? onRemove() : x => x
+    function handleClick(value) {
+        return value !== '' ? setSelectedChapter(value) : null;
     }
 
     function Item ({decorateHandle, removable, onChange, onRemove, value, onClick}) {
         return (
             <div style={{ display: 'grid', gridTemplateColumns: '75% 15% 10%', gridTemplateRows: '40px' }}>
-                <CustomInput value={value} onChange={onChange} onBlur={handleBlur(value)} onClick={onClick} />
+                <CustomInput value={value} onChange={onChange} onBlur={handleBlur(value)} />
                 {decorateHandle(<span style={{cursor: 'move'}}><OpenWithIcon /></span>)}
                 <span
-                    onClick={() => handleDeleteChapter(removable, onRemove, value)}
+                    onClick={removable ? onRemove : x => x}
                     style={{
                         cursor: removable ? 'pointer' : 'not-allowed',
                     }}><DeleteIcon /></span>
@@ -60,9 +56,9 @@ function QuickView (props) {
     function StagingItem ({value, onAdd, canAdd, add, onChange}) {
         return (
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridTemplateRows: '40px' }}>
-                <CustomInput value={value} onChange={onChange} />
+                <CustomInput value={value} onChange={onChange} onAdd={onAdd} canAdd={canAdd} />
                 <span
-                    onClick={() => handleAddChapter(canAdd, onAdd, value)}
+                    onClick={canAdd ? onAdd : undefined}
                     style={{
                         color: canAdd ? 'white' : 'gray',
                         cursor: canAdd ? 'pointer' : 'not-allowed'
@@ -88,6 +84,9 @@ function QuickView (props) {
                                 value={value}
                             />
                         </ul>
+                        <Button>
+                            <SaveIcon onClick={() => saveAll(value)}/>
+                        </Button>
                     </div>
                 </div>
             </div>

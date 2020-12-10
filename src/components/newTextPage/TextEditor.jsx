@@ -79,7 +79,7 @@ function TextEditor(props) {
     return (
         <div className={classes.container}>
             {
-                selectedChapter && selectedChapter !== 0 && selectedChapter.title !== '' ? 
+                selectedChapter && selectedChapter !== 0 && selectedChapter !== '' ? 
                     <div className={classes.textEditor} >
                         <div className={classes.editorTools}>
                             <Button disabled={!chapters.every(chapter => chapter.title !== '')} onClick={addNewChapter}>
@@ -97,7 +97,7 @@ function TextEditor(props) {
                         </div>
                         <div className={classes.textField}>
                             <FormControl onSubmit={handleBlur}>
-                                <Typography className={classes.title} variant="h2">{selectedChapter.title}</Typography>
+                                <Typography className={classes.title} variant="h2">{selectedChapter}</Typography>
                             </FormControl>
                             <div className={classes.editor} onClick={() => {textInput.current.focus()}}>
                                 <div className={editorAlignmentClass}>
