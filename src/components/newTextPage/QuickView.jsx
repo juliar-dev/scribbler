@@ -20,14 +20,16 @@ function QuickView (props) {
     }, [chapters])
 
     function handleChapters(value) {
-        return value === '' ? null : setSelectedChapter(value);
+        const selectedChapter = newChapters.find(chapter => chapter.title === value);
+        return value === '' ? null : setSelectedChapter(selectedChapter);
     }
 
     const CustomInput = ({ value, onChange, type, onClick }) => 
         <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} type={type} value={value} onChange={e => onChange(e.target.value)} onClick={() => handleChapters(value)} />
 
     function handleBlur(value) {
-        setSelectedChapter(value);
+        const selectedChapter = newChapters.find(chapter => chapter.title === value);
+        setSelectedChapter(selectedChapter);
     }
     
     function handleAddChapter(canAdd, onAdd, value) {

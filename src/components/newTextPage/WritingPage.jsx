@@ -15,6 +15,8 @@ function WritingPage(props) {
 
     const [ chapters, setChapters ] = useState([]);
 
+    console.log(selectedChapter, '<<< Selected Chapter');
+
     return (
         <div className={classes.container}>
             <div className={classes.content}>
