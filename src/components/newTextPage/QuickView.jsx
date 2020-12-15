@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withStyles, Button, Input } from "@material-ui/core";
+import { withStyles, Input, Typography } from "@material-ui/core";
 import styles from './newTextPage-Styles/quickView';
 
 import ReactListInput from 'react-list-input'
@@ -7,43 +7,61 @@ import ReactListInput from 'react-list-input'
 import AddIcon from '@material-ui/icons/Add';
 import OpenWithIcon from '@material-ui/icons/OpenWith';
 import DeleteIcon from '@material-ui/icons/Delete';
-import SaveIcon from '@material-ui/icons/Save';
 
 function QuickView (props) {
 
     const { classes, selectedChapter, setSelectedChapter, title, setTitle, saveAll } = props;
 
-    const [ value, setValue ] = useState([]);
+    const [ values, setValues ] = useState([]);
+    const [ isSaved, setIsSaved ] = useState(false);
 
     const CustomInput = ({ value, onChange, type, onAdd, canAdd }) => 
         <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} 
                 type={type} 
                 value={value} 
                 onChange={e => handleChange(onChange, e.target.value)} 
-                onBlur={(e) => handleBlur(e.target.value, onAdd, canAdd)} 
+                onBlur={(e) => handleBlur(e.target.value)} 
                 onClick={(e) => handleClick(e.target.value)}
+                onKeyDown={(e) => handleKeyPress(e.key, onAdd, canAdd)}
+                key={value}
+                autoFocus={!selectedChapter}
         />
 
     function handleChange(change, value) {
+        saveAll(values);
         change(value);
+        setIsSaved(false);
     }
 
-    function handleBlur(value, onAdd, canAdd) {
+    function handleBlur(value) {
+        setIsSaved(true);
         setSelectedChapter(value);
-        return canAdd ? onAdd() : undefined;
+    }
+
+    function handleKeyPress(key, onAdd, canAdd) {
+        if (key === 'Enter' || key === 'Tab') {
+            return canAdd ? onAdd() : undefined;
+        }
     }
 
     function handleClick(value) {
-        return value !== '' ? setSelectedChapter(value) : null;
+        return value !== '' ? setSelectedChapter(value) : setSelectedChapter(null);
+    }
+
+    function handleDelete(removable, onRemove) {
+        setSelectedChapter(null);
+        if (removable) {
+            onRemove();
+        }
     }
 
     function Item ({decorateHandle, removable, onChange, onRemove, value, onClick}) {
         return (
             <div style={{ display: 'grid', gridTemplateColumns: '75% 15% 10%', gridTemplateRows: '40px' }}>
-                <CustomInput value={value} onChange={onChange} onBlur={handleBlur(value)} />
+                <CustomInput value={value} onChange={onChange} />
                 {decorateHandle(<span style={{cursor: 'move'}}><OpenWithIcon /></span>)}
                 <span
-                    onClick={removable ? onRemove : x => x}
+                    onClick={() => {handleDelete(removable, onRemove)}}
                     style={{
                         cursor: removable ? 'pointer' : 'not-allowed',
                     }}><DeleteIcon /></span>
@@ -70,21 +88,21 @@ function QuickView (props) {
             <div className={classes.container}>
                 <div className={classes.content}>
                     <div className={classes.main}>
-                        <Input className={classes.title} placeholder="Title" value={title} onChange={e => {setTitle(e.target.value)}} />
+                        <div>
+                            <Input className={classes.title} placeholder="Title" value={title} onChange={e => {setTitle(e.target.value)}} />
+                        </div>
                         <ul className={classes.chapterList}>  
                             <ReactListInput
                                 initialStagingValue=''
-                                onChange={value => setValue(value)}
+                                onChange={values => setValues(values)}
                                 maxItems={Infinity}
                                 minItems={1}
                                 ItemComponent={Item}
                                 StagingComponent={StagingItem}
-                                value={value}
+                                value={values}
                             />
                         </ul>
-                        <Button>
-                            <SaveIcon onClick={() => saveAll(value)}/>
-                        </Button>
+                        <Typography>{isSaved ? 'Saved' : 'unsaved changes'}</Typography>
                     </div>
                 </div>
             </div>

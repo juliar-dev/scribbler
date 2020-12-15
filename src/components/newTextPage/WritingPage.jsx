@@ -15,12 +15,17 @@ function WritingPage(props) {
 
     const [ chapters, setChapters ] = useState([]);
 
+    console.log(chapters);
+
     function saveAll(chapterTitles, chapterContents) {
-        let savedChapters = chapterTitles.map(chapterTitle => {
-            return {title: chapterTitle, text: ''};
-        })
-        setChapters(savedChapters);
+        if (chapterTitles) {
+            let savedChapters = chapterTitles.map(chapterTitle => {
+                return {title: chapterTitle, text: ''};
+            })
+            setChapters(savedChapters);
+        }
     }
+
 
     return (
         <div className={classes.container}>

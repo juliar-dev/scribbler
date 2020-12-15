@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 
 import { Button, FormControl, Input, Typography, withStyles } from "@material-ui/core";
 import styles from './newTextPage-Styles/textEditorStyles';
@@ -27,6 +27,7 @@ function TextEditor(props) {
     const [ newChapterTitle, setNewChapterTitle ] = useState('');
     const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
     const [ editorAlignmentClass, setEditorAlignmentClass ] = useState(classes.left);
+    const [ editorText, setEditorText ] = useState('');
 
     const {styles, customStyleFn} = createStyles(['font-size']);
 
@@ -64,6 +65,9 @@ function TextEditor(props) {
     }
 
     function onChange(editorState) {
+        const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
+        const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
+        setEditorText(value);
         setEditorState(editorState);
     }
 
