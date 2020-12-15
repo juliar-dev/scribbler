@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 
-import { Button, FormControl, Input, Typography, withStyles } from "@material-ui/core";
+import { Button, Typography, withStyles } from "@material-ui/core";
 import styles from './newTextPage-Styles/textEditorStyles';
 import createStyles from 'draft-js-custom-styles';
 
-import AddIcon from '@material-ui/icons/Add';
+// import AddIcon from '@material-ui/icons/Add';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import ImageIcon from '@material-ui/icons/Image';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -18,13 +18,12 @@ import BulletPointSetter from './editorTools/BulletPointSetter';
 import TextAlignmentSetter from './editorTools/TextAlignmentSetter';
 
 function TextEditor(props) {
-    const { classes, selectedChapter, setSelectedChapter, chapters, setChapters } = props;
+    const { classes, selectedChapter, setSelectedChapter, chapters, setChapters, saveAll } = props;
 
     const paragraphs = document.querySelectorAll(".public-DraftStyleDefault-ltr");
 
     const textInput = useRef();
 
-    const [ newChapterTitle, setNewChapterTitle ] = useState('');
     const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
     const [ editorAlignmentClass, setEditorAlignmentClass ] = useState(classes.left);
     const [ editorText, setEditorText ] = useState('');
@@ -36,33 +35,6 @@ function TextEditor(props) {
             'backgroundColor': '#faed27',
         }
     };
-
-    function handleBlur(e) {
-        const { value } = e.target;
-
-        let newChapter = {...selectedChapter};
-        newChapter.title = newChapterTitle;
-        setSelectedChapter(newChapter);
-
-
-
-        if (chapters.length === 0) {
-            setChapters(chapters => [...chapters, newChapter]);
-        } else {
-            let newChapters = [...chapters];
-            newChapters.map(chapter => {
-                chapter.title === '' ? chapter.title = value : chapter.title = chapter.title;
-            })
-            setChapters(newChapters);
-        }
-
-        setNewChapterTitle('');
-    }
-
-    function addNewChapter() {
-        setChapters(chapters => [...chapters, {title: '', text: ''}]);
-        setSelectedChapter(selectedChapter[selectedChapter.length -1]);
-    }
 
     function onChange(editorState) {
         const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
@@ -86,9 +58,9 @@ function TextEditor(props) {
                 selectedChapter && selectedChapter !== 0 && selectedChapter !== '' ? 
                     <div className={classes.textEditor} >
                         <div className={classes.editorTools}>
-                            <Button disabled={!chapters.every(chapter => chapter.title !== '')} onClick={addNewChapter}>
+                            {/* <Button disabled={!chapters.every(chapter => chapter.title !== '')} onClick={addNewChapter}>
                                 <AddIcon />
-                            </Button>
+                            </Button> */}
                             <UndoRedoSetter />
                             <FontSizeSetter editorState={editorState} setEditorState={setEditorState} styles={styles}/>
                             <TextStyleSetter editorState={editorState} onChange={onChange}/>
@@ -100,9 +72,7 @@ function TextEditor(props) {
                             <Button><DeleteIcon /></Button>
                         </div>
                         <div className={classes.textField}>
-                            <FormControl onSubmit={handleBlur}>
                                 <Typography className={classes.title} variant="h2">{selectedChapter}</Typography>
-                            </FormControl>
                             <div className={classes.editor} onClick={() => {textInput.current.focus()}}>
                                 <div className={editorAlignmentClass}>
                                     <Editor 
