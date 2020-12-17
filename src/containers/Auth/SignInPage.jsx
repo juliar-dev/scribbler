@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom'
+
 import { 
     Paper, 
     Avatar, 
@@ -24,6 +26,8 @@ import { Link } from 'react-router-dom';
 function SignInPage(props) {
     const { classes } = props;
 
+    const history = useHistory();
+
     const { initializeUser } = useContext(UserContext);
 
     const [ username, setUsername ] = useState('');
@@ -40,6 +44,7 @@ function SignInPage(props) {
         const user = await login(username, password)
             initializeUser(user);
             // window.location.href = "/";
+        history.goBack();
 }
 
     return (
