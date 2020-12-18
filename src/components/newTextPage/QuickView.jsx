@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles, Input, Typography } from "@material-ui/core";
 import styles from './newTextPage-Styles/quickView';
 
@@ -14,6 +14,11 @@ function QuickView (props) {
 
     const [ values, setValues ] = useState([]);
     const [ isSaved, setIsSaved ] = useState(false);
+    const [ focus, setFocus ] = useState(null);
+
+    useEffect(() => {
+        saveAll(values);
+    }, [values])
 
     const CustomInput = ({ value, onChange, type, onAdd, canAdd }) => 
         <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} 
@@ -22,9 +27,9 @@ function QuickView (props) {
                 onChange={e => handleChange(onChange, e.target.value)} 
                 onBlur={(e) => handleBlur(e.target.value)} 
                 onClick={(e) => handleClick(e.target.value)}
-                onKeyDown={(e) => handleKeyPress(e.key, onAdd, canAdd)}
+                onKeyDown={(e) => handleKeyPress(e.target.value, e.key, onAdd, canAdd)}
                 key={value}
-                autoFocus={!selectedChapter}
+                autoFocus={!selectedChapter && focus !== 'title'}
         />
 
     function handleChange(change, value) {
@@ -38,14 +43,21 @@ function QuickView (props) {
         setSelectedChapter(value);
     }
 
-    function handleKeyPress(key, onAdd, canAdd) {
+    function handleKeyPress(value, key, onAdd, canAdd) {
         if (key === 'Enter' || key === 'Tab') {
-            return canAdd ? onAdd() : undefined;
+            setSelectedChapter(value);
+            handleAdd(canAdd, onAdd);
         }
     }
 
     function handleClick(value) {
         return value !== '' ? setSelectedChapter(value) : setSelectedChapter(null);
+    }
+
+    function handleAdd(canAdd, onAdd) {
+        if (canAdd) {
+            onAdd();
+        }
     }
 
     function handleDelete(removable, onRemove) {
@@ -74,7 +86,7 @@ function QuickView (props) {
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridTemplateRows: '40px' }}>
                 <CustomInput value={value} onChange={onChange} onAdd={onAdd} canAdd={canAdd} />
                 <span
-                    onClick={canAdd ? onAdd : undefined}
+                    onClick={() => handleAdd(canAdd, onAdd)}
                     style={{
                         color: canAdd ? 'white' : 'gray',
                         cursor: canAdd ? 'pointer' : 'not-allowed'
@@ -89,7 +101,12 @@ function QuickView (props) {
                 <div className={classes.content}>
                     <div className={classes.main}>
                         <div>
-                            <Input className={classes.title} placeholder="Title" value={title} onChange={e => {setTitle(e.target.value)}} />
+                            <Input className={classes.title} 
+                                    placeholder="Title" value={title} 
+                                    onChange={e => {setTitle(e.target.value)}}
+                                    onFocus={() => setFocus('title')}
+                                    onBlur={() => setFocus(null)}
+                                    autoFocus />
                         </div>
                         <ul className={classes.chapterList}>  
                             <ReactListInput
