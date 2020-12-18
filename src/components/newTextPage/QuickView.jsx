@@ -10,7 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 function QuickView (props) {
 
-    const { classes, selectedChapter, setSelectedChapter, title, setTitle, saveAll } = props;
+    const { classes, chapters, selectedChapter, setSelectedChapter, title, setTitle, saveAll } = props;
 
     const [ values, setValues ] = useState([]);
     const [ isSaved, setIsSaved ] = useState(false);
@@ -19,6 +19,8 @@ function QuickView (props) {
     useEffect(() => {
         saveAll(values);
     }, [values])
+    
+    // console.log(selectedChapter, '<<<<');
 
     const CustomInput = ({ value, onChange, type, onAdd, canAdd }) => 
         <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} 
@@ -40,7 +42,6 @@ function QuickView (props) {
 
     function handleBlur(value) {
         setIsSaved(true);
-        setSelectedChapter(value);
     }
 
     function handleKeyPress(value, key, onAdd, canAdd) {
@@ -61,7 +62,7 @@ function QuickView (props) {
     }
 
     function handleDelete(removable, onRemove) {
-        setSelectedChapter(null);
+        // setSelectedChapter(null);
         if (removable) {
             onRemove();
         }

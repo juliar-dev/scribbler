@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
+import React, { useState, useRef, useEffect } from "react";
+import { Editor, EditorState, ContentState, RichUtils, convertToRaw } from 'draft-js';
 
 import { Button, Typography, withStyles } from "@material-ui/core";
 import styles from './newTextPage-Styles/textEditorStyles';
@@ -36,11 +36,34 @@ function TextEditor(props) {
         }
     };
 
+    useEffect(() => {
+
+        let newEditorState = EditorState.push(editorState, ContentState.createFromText(''));
+        setEditorState(newEditorState);
+        const savedText = retrieveEditorContent();
+        newEditorState = EditorState.push(editorState, ContentState.createFromText(savedText ? savedText : ''));
+        setEditorState(newEditorState);
+
+    }, [selectedChapter])
+
     function onChange(editorState) {
+        // console.log(selectedChapter);
         const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
         const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
-        setEditorText(value);
+        // saveAll(null, value);
+        saveEditorContent(value);
+        // setEditorText(value);
         setEditorState(editorState);
+    }
+
+    function saveEditorContent(data) {
+        localStorage.setItem(`chapter ${selectedChapter}: `, JSON.stringify(data));
+        saveAll(null, data);
+    }
+
+    function retrieveEditorContent() {
+        const savedData = localStorage.getItem(`chapter ${selectedChapter}: `);
+        return savedData ? JSON.parse(savedData) : null;
     }
 
     function handleKeyCommand(command) {
@@ -73,7 +96,7 @@ function TextEditor(props) {
                         </div>
                         <div className={classes.textField}>
                                 <Typography className={classes.title} variant="h2">{selectedChapter}</Typography>
-                            <div className={classes.editor} onClick={() => {textInput.current.focus()}}>
+                            <div className={classes.editor} onClick={() => {textInput.current.focus()}} onBlur={() => setSelectedChapter(null)}>
                                 <div className={editorAlignmentClass}>
                                     <Editor 
                                         editorState={editorState} 
