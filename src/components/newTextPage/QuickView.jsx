@@ -8,9 +8,10 @@ import AddIcon from '@material-ui/icons/Add';
 import OpenWithIcon from '@material-ui/icons/OpenWith';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-function QuickView (props) {
+let current = null;
 
-    const { classes, chapters, selectedChapter, setSelectedChapter, title, setTitle, saveAll } = props;
+function QuickView (props) {
+    const { classes, selectedChapter, setSelectedChapter, title, setTitle, saveAll } = props;
 
     const [ values, setValues ] = useState([]);
     const [ isSaved, setIsSaved ] = useState(false);
@@ -18,10 +19,10 @@ function QuickView (props) {
 
     useEffect(() => {
         saveAll(values);
+        current = selectedChapter;
     }, [values])
-    
-    // console.log(selectedChapter, '<<<<');
 
+    
     const CustomInput = ({ value, onChange, type, onAdd, canAdd }) => 
         <Input style={{ borderBottom: '1px solid white', margin: '0 0 10px 0' }} 
                 type={type} 
@@ -35,12 +36,15 @@ function QuickView (props) {
         />
 
     function handleChange(change, value) {
+        console.log(current);
+        // const chap = localStorage.getItem(`chapter ${selectedChapter}`);
+        // console.log(chap);
         saveAll(values);
         change(value);
         setIsSaved(false);
     }
 
-    function handleBlur(value) {
+    function handleBlur() {
         setIsSaved(true);
     }
 
@@ -62,13 +66,12 @@ function QuickView (props) {
     }
 
     function handleDelete(removable, onRemove) {
-        // setSelectedChapter(null);
         if (removable) {
             onRemove();
         }
     }
 
-    function Item ({decorateHandle, removable, onChange, onRemove, value, onClick}) {
+    function Item ({decorateHandle, removable, onChange, onRemove, value}) {
         return (
             <div style={{ display: 'grid', gridTemplateColumns: '75% 15% 10%', gridTemplateRows: '40px' }}>
                 <CustomInput value={value} onChange={onChange} />

@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from '../../contexts/UserContext';
 import { withStyles } from '@material-ui/core';
 
 import styles from './newTextPage-Styles/writingStyles';
 import Sidebar from "./Sidebar";
-import QuickView from './QuickView';
+// import QuickView from './QuickView';
+import TextDetailsEditor from './TextDetailsEditor';
 import TextEditor from "./TextEditor";
 
 function WritingPage(props) {
+    const { user } = useContext(UserContext);
+
     const { classes } = props;
 
     const [ selectedPage, setSelectedPage ] = useState("new_text");
@@ -14,6 +18,16 @@ function WritingPage(props) {
     const [ selectedChapter, setSelectedChapter ] = useState(null);
 
     const [ chapters, setChapters ] = useState([]);
+
+    const [ story, setStory ] = useState({
+        title: '',
+        blurb: '',
+        genres: [],
+        chapters: [],
+        author: ''
+    });
+
+    console.log(story)
 
     function saveAll(chapterTitles, chapterContents) {
         if (chapterTitles) {
@@ -41,14 +55,17 @@ function WritingPage(props) {
                     </div>
                     {selectedPage === 'new_text' && 
                         <>
-                            <div className={classes.quickView}>
+                            {/* <div className={classes.quickView}>
                                 <QuickView chapters={chapters} 
                                             setChapters={setChapters} 
                                             selectedChapter={selectedChapter} 
                                             setSelectedChapter={setSelectedChapter} 
                                             title={title} setTitle={setTitle} 
                                             saveAll={saveAll} />
-                            </div>  
+                            </div>   */}
+                            <div className={classes.quickView}>
+                                <TextDetailsEditor story={story} setStory={setStory} setSelectedChapter={setSelectedChapter} />
+                            </div>
                             <div className={classes.editor}>
                                 <TextEditor selectedChapter={selectedChapter} 
                                             setSelectedChapter={setSelectedChapter} 
