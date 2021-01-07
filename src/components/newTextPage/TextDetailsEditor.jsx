@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import { Button, Typography, TextField, withStyles } from "@material-ui/core";
+import { Button, TextField, withStyles } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './newTextPage-Styles/textDetailsEditorStyles';
 
@@ -42,6 +42,7 @@ function TextDetailsEditor(props) {
             editedStory.genres.push(genre) 
         } else {
             editedStory.chapters.push({title: chapter, content: ''});
+            setSelectedChapter(chapter);
         }
         
         setStory(editedStory);

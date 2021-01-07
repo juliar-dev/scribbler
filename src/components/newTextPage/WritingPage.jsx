@@ -14,10 +14,10 @@ function WritingPage(props) {
     const { classes } = props;
 
     const [ selectedPage, setSelectedPage ] = useState("new_text");
-    const [ title, setTitle ] = useState('')
+    // const [ title, setTitle ] = useState('')
     const [ selectedChapter, setSelectedChapter ] = useState(null);
 
-    const [ chapters, setChapters ] = useState([]);
+    // const [ chapters, setChapters ] = useState([]);
 
     const [ story, setStory ] = useState({
         title: '',
@@ -27,24 +27,22 @@ function WritingPage(props) {
         author: ''
     });
 
-    console.log(story)
-
-    function saveAll(chapterTitles, chapterContents) {
-        if (chapterTitles) {
-            let savedChapters = chapterTitles.map(chapterTitle => {
-                return {title: chapterTitle, text: ''};
-            })
-            setChapters(savedChapters);
-        } else if (chapterContents && selectedChapter !== null) {
-            setChapters(chapters.map((chapter) => {
-                if (chapter.title === selectedChapter) {
-                    chapter = {...chapter, text: chapterContents};
-                    return chapter
-                }
-                return chapter;
-            }));
-        }
-    }
+    // function saveAll(chapterTitles, chapterContents) {
+    //     if (chapterTitles) {
+    //         let savedChapters = chapterTitles.map(chapterTitle => {
+    //             return {title: chapterTitle, text: ''};
+    //         })
+    //         setChapters(savedChapters);
+    //     } else if (chapterContents && selectedChapter !== null) {
+    //         setChapters(chapters.map((chapter) => {
+    //             if (chapter.title === selectedChapter) {
+    //                 chapter = {...chapter, text: chapterContents};
+    //                 return chapter
+    //             }
+    //             return chapter;
+    //         }));
+    //     }
+    // }
 
     return (
         <div className={classes.container}>
@@ -69,9 +67,12 @@ function WritingPage(props) {
                             <div className={classes.editor}>
                                 <TextEditor selectedChapter={selectedChapter} 
                                             setSelectedChapter={setSelectedChapter} 
-                                            chapters={chapters} 
-                                            setChapters={setChapters}
-                                            saveAll={saveAll} />
+                                            // chapters={chapters} 
+                                            // setChapters={setChapters}
+                                            // saveAll={saveAll}
+                                            setStory={setStory}
+                                            story={story}
+                                            />
                             </div>
                         </>
                     }

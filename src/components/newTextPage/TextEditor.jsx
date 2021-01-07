@@ -17,7 +17,7 @@ import BulletPointSetter from './editorTools/BulletPointSetter';
 import TextAlignmentSetter from './editorTools/TextAlignmentSetter';
 
 function TextEditor(props) {
-    const { classes, selectedChapter, setSelectedChapter, saveAll } = props;
+    const { classes, selectedChapter, setSelectedChapter, setStory, story } = props;
 
     const paragraphs = document.querySelectorAll(".public-DraftStyleDefault-ltr");
 
@@ -42,6 +42,8 @@ function TextEditor(props) {
         newEditorState = EditorState.push(editorState, ContentState.createFromText(savedText ? savedText : ''));
         setEditorState(newEditorState);
 
+        console.log(story);
+
     }, [selectedChapter])
 
     function onChange(editorState) {
@@ -53,12 +55,18 @@ function TextEditor(props) {
 
     function saveEditorContent(data) {
         localStorage.setItem(`chapter ${selectedChapter}: `, JSON.stringify(data));
-        saveAll(null, data);
+        const editedStory = { ...story };
+        const chapterToEdit =  editedStory.chapters.find(chapter => chapter.title === selectedChapter);
+        chapterToEdit.content = data;
+        setStory(editedStory);
     }
 
     function retrieveEditorContent() {
         const savedData = localStorage.getItem(`chapter ${selectedChapter}: `);
         return savedData ? JSON.parse(savedData) : null;
+        // const editedStory = { ...story };
+        // const chapterToRetrieve = editedStory.chapters.find(chapter => chapter.title = selectedChapter);
+        // return chapterToRetrieve ? chapterToRetrieve.content : null;
     }
 
     function handleKeyCommand(command) {
