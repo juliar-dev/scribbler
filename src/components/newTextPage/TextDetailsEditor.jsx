@@ -6,15 +6,12 @@ import styles from './newTextPage-Styles/textDetailsEditorStyles';
 
 function TextDetailsEditor(props) {
     const { classes, story, setStory, setSelectedChapter } = props;
-
     const [ genre, setGenre ] = useState('');
     const [ chapter, setChapter ] = useState('');
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-
         const editedStory = { ...story };
-
         switch(id) {
             case 'title':
                 editedStory.title = value;
@@ -31,33 +28,26 @@ function TextDetailsEditor(props) {
             default:
                 return;
         }
-
         setStory(editedStory);
     }
 
     const handleClick = (id) => {
         const editedStory = { ...story };
-
         if (id === 'genreAdder') {
             editedStory.genres.push(genre) 
         } else {
             editedStory.chapters.push({title: chapter, content: ''});
             setSelectedChapter(chapter);
         }
-        
         setStory(editedStory);
-
         setGenre('');
         setChapter('');
     }
 
     const handleDelete = (selected) => {
         const editedStory = { ...story };
-
         const filteredChapters = editedStory.chapters.filter(chapter => chapter.title !== selected.title);
-
         editedStory.chapters = filteredChapters
-
         setStory(editedStory);
     }
 

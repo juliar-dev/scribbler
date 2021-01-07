@@ -18,16 +18,11 @@ import TextAlignmentSetter from './editorTools/TextAlignmentSetter';
 
 function TextEditor(props) {
     const { classes, selectedChapter, setSelectedChapter, setStory, story } = props;
-
     const paragraphs = document.querySelectorAll(".public-DraftStyleDefault-ltr");
-
     const textInput = useRef();
-
     const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
     const [ editorAlignmentClass, setEditorAlignmentClass ] = useState(classes.left);
-
     const {styles, customStyleFn} = createStyles(['font-size']);
-
     const styleMap = {
         'HIGHLIGHT': {
             'backgroundColor': '#faed27',
@@ -35,15 +30,11 @@ function TextEditor(props) {
     };
 
     useEffect(() => {
-
         let newEditorState = EditorState.push(editorState, ContentState.createFromText(''));
         setEditorState(newEditorState);
         const savedText = retrieveEditorContent();
         newEditorState = EditorState.push(editorState, ContentState.createFromText(savedText ? savedText : ''));
         setEditorState(newEditorState);
-
-        console.log(story);
-
     }, [selectedChapter])
 
     function onChange(editorState) {
@@ -64,9 +55,6 @@ function TextEditor(props) {
     function retrieveEditorContent() {
         const savedData = localStorage.getItem(`chapter ${selectedChapter}: `);
         return savedData ? JSON.parse(savedData) : null;
-        // const editedStory = { ...story };
-        // const chapterToRetrieve = editedStory.chapters.find(chapter => chapter.title = selectedChapter);
-        // return chapterToRetrieve ? chapterToRetrieve.content : null;
     }
 
     function handleKeyCommand(command) {
