@@ -11,7 +11,19 @@ const styles = theme => ({
         display: 'grid',
         gridTemplateRows: 'auto',
         gridTemplateColumns: "15vw 20vw auto",
-        marginTop: theme.spacing(5.5)
+        marginTop: theme.spacing(5.5),
+    },
+    saveButton: {
+        color: colors.toolBar,
+        gridRow: '1 / 1',
+        gridColumn: '3 / 3',
+        justifySelf: 'end',
+        alignSelf: 'end',
+        zIndex: 10,
+        '& Button': {
+            color: colors.toolBar,
+            margin: `0 0 ${theme.spacing(0.5)}px 0`
+        }
     },
     sidebar: {
         gridRow: '1 / 1',

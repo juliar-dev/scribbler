@@ -1,6 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from '../../contexts/UserContext';
-import { withStyles } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
+
+import SaveIcon from '@material-ui/icons/Save';
 
 import styles from './newTextPage-Styles/writingStyles';
 import Sidebar from "./Sidebar";
@@ -19,11 +21,34 @@ function WritingPage(props) {
         chapters: [],
         author: ''
     });
+    const [ saved, setSaved ] = useState(false);
+
+    const prevStateRef = useRef();
+
+    useEffect(() => {
+        prevStateRef.current !== story ? setSaved(false) : setSaved(true);
+        if (user) {
+            const editedStory = { ...story };
+            editedStory.author = user.username;
+            setStory(editedStory);
+        }
+    }, []);
+
+
+    const handleSave = () => {
+        prevStateRef.current = story;
+        setSaved(true);
+        localStorage.clear();
+    }
 
     return (
         <div className={classes.container}>
             <div className={classes.content}>
                 <div className={classes.dashboard}>
+                    <div className={classes.saveButton}>
+                        <span>{saved ? 'Saved' : 'Unsaved Changes'}</span>
+                        <Button onClick={() => handleSave()}><SaveIcon /></Button>
+                    </div>
                     <div className={classes.sidebar}>
                         <Sidebar setSelectedPage={setSelectedPage} />
                     </div>
@@ -37,7 +62,7 @@ function WritingPage(props) {
                                             setSelectedChapter={setSelectedChapter} 
                                             setStory={setStory}
                                             story={story}
-                                            />
+                                />
                             </div>
                         </>
                     }
