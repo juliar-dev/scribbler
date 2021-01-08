@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from '../../contexts/UserContext';
+import createStory from '../../composables/createStory';
+
 import { Button, withStyles } from '@material-ui/core';
-
 import SaveIcon from '@material-ui/icons/Save';
-
 import styles from './newTextPage-Styles/writingStyles';
+
 import Sidebar from "./Sidebar";
 import TextDetailsEditor from './TextDetailsEditor';
 import TextEditor from "./TextEditor";
@@ -37,6 +38,7 @@ function WritingPage(props) {
 
     const handleSave = () => {
         prevStateRef.current = story;
+        createStory(story);
         setSaved(true);
         localStorage.clear();
     }
